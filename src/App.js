@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import MadLibs from './madlibs/MadLibs.js';
 import Story from './components/Story.js';
+import Form from './components/Form.js'
 
 class App extends Component {
   constructor() {
@@ -10,6 +11,7 @@ class App extends Component {
     this.state = {
       selectedMadLib: MadLibs[0]
     };
+    console.log(this.state.selectedMadLib.words);
   }
 
   // Update the value of a word in the selected
@@ -31,6 +33,9 @@ class App extends Component {
         {/*
           Render your form with input values
         */}
+
+        <Form words={this.state.selectedMadLib.words}/>
+
         <Story
           title={ this.state.selectedMadLib.title }
           text={ this.state.selectedMadLib.getText() }
