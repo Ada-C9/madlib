@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import './App.css';
 import MadLibs from './madlibs/MadLibs.js';
 import Story from './components/Story.js';
+import Form from './components/Form.js';
 
 class App extends Component {
   constructor() {
     super();
 
     this.state = {
-      selectedMadLib: MadLibs[0]
+      selectedMadLib: MadLibs[Math.round(Math.random() * (4 - 0)) + 0]
     };
   }
 
@@ -24,6 +25,8 @@ class App extends Component {
   }
 
   render() {
+    
+
     return (
       <section className="App">
         <h1>Welcome to MadLibs!</h1>
@@ -31,6 +34,7 @@ class App extends Component {
         {/*
           Render your form with input values
         */}
+        <Form/>
         <Story
           title={ this.state.selectedMadLib.title }
           text={ this.state.selectedMadLib.getText() }
