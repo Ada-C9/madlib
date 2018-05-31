@@ -6,9 +6,9 @@ import Story from './components/Story.js';
 class App extends Component {
   constructor() {
     super();
-
+    let selected = (Math.floor(Math.random() * 4));
     this.state = {
-      selectedMadLib: MadLibs[0]
+      selectedMadLib: MadLibs[selected]
     };
   }
 
