@@ -10,7 +10,7 @@ class App extends Component {
 
     let random = MadLibs[Math.floor(Math.random() * MadLibs.length)];
     this.state = {
-      selectedMadLib: random
+      selectedMadLib: MadLibs[0]
     };
   }
 
@@ -25,8 +25,9 @@ class App extends Component {
     this.setState({selectedMadLib: updatedMadLib});
   }
 
+
   render() {
-    console.log(this.state.selectedMadLib.words)
+    console.log(this.state.selectedMadLib.words.length)
     return (
       <section className="App">
         <h1>Welcome to MadLibs!</h1>
@@ -34,7 +35,9 @@ class App extends Component {
         {/*
           Render your form with input values
         */
-        <NewMadLibForm />
+        <NewMadLibForm
+          words={ this.state.selectedMadLib.words }
+        />
         }
         <Story
           title={ this.state.selectedMadLib.title }
