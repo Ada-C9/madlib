@@ -13,7 +13,7 @@ export default [
     words: [
       {
         "key": "adjective_1",
-        "label": "Adjective 1"
+        "label": "Adjective"
       },
       {
         "key": "adjective_2",

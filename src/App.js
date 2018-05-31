@@ -38,7 +38,7 @@ class App extends Component {
 
         <form>
         {this.state.selectedMadLib.words.map((word) => {
-          return <input key={word.key} placeholder={word.label} value="" type="text" />;
+          return <input onChange={(event) => {this.updateWord(word.key, event.target.value);}} key={word.key} placeholder={word.label} type="text" />;
         })}
         </form>
 
