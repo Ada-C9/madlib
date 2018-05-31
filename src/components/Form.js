@@ -13,21 +13,23 @@ class Form extends Component {
   render(){
     return(
       <div>
-      <form>
-        <div>
-          <label htmlFor="name">Name:</label>
-          <input name="name"/>
-        </div>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input name="email"/>
-        </div>
-        <input
-          className="button success"
-          type="submit"
-          value="Generate MadLib"
-        />
-      </form>
+        <form>
+          {
+            this.props.words.map((word)=>{
+              return(
+                <div key={word.key}>
+                  <label htmlFor={word.key}>{word.label}:</label>
+                  <input name={word.label}/>
+                </div>
+              );
+            })
+          }
+          <input
+            className="button success"
+            type="submit"
+            value="Generate MadLib"
+          />
+        </form>
       </div>
     );
   }
