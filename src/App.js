@@ -7,6 +7,7 @@ class App extends Component {
   constructor() {
     super();
 
+    // instance of app
     this.state = {
       selectedMadLib: MadLibs[Math.floor(Math.random() * MadLibs.length)]
     };
@@ -26,18 +27,24 @@ class App extends Component {
   render() {
     return (
       <section className="App">
-        <h1>Welcome to MadLibs!</h1>
-        <p>Fill in all of the choices to see your final story.</p>
-        {/*
-          Render your form with input values
-        */}
-        <Story
-          title={ this.state.selectedMadLib.title }
-          text={ this.state.selectedMadLib.getText() }
-          />
-      </section>
-    );
-  }
-}
+      <h1>Welcome to MadLibs!</h1>
+      <p>Fill in all of the choices to see your final story.</p>
+      {/*Render your form with input values*/}
 
-export default App;
+        <Story
+        title={ this.state.selectedMadLib.title }
+        text={ this.state.selectedMadLib.getText() }
+        />
+
+        <form>
+        {this.state.selectedMadLib.words.map((word) => {
+          return <input key={word.key} placeholder={word.label} value="" type="text" />;
+        })}
+        </form>
+
+        </section>
+      );
+    }
+  }
+
+  export default App;
