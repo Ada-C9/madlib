@@ -10,20 +10,24 @@ class Form extends Component {
     words: PropTypes.array.isRequired,
   }
 
+  generateForm(){
+    return(
+      this.props.words.map((word)=>{
+        return(
+          <div key={word.key}>
+            <label htmlFor={word.key}>{word.label}:</label>
+            <input name={word.label}/>
+          </div>
+        );
+      })
+    );
+  }
+
   render(){
     return(
       <div>
         <form>
-          {
-            this.props.words.map((word)=>{
-              return(
-                <div key={word.key}>
-                  <label htmlFor={word.key}>{word.label}:</label>
-                  <input name={word.label}/>
-                </div>
-              );
-            })
-          }
+          { this.generateForm() }
           <input
             className="button success"
             type="submit"
