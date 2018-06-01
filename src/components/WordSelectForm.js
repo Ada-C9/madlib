@@ -3,15 +3,20 @@ import MadLibs from '../madlibs/MadLibs';
 import PropTypes from 'prop-types';
 
 class WordSelectForm extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     // tracking form fields as part of state
-    this.state = {
-      adjective_1: '',
-      adjective_2: '',
-      noun_1: '',
-      noun_2: ''
-    };
+    let initialState = {};
+
+    props.story.words.forEach((word) => {
+      initialState[word.key] = '';
+    });
+
+    this.state = initialState;
+  }
+
+  static propTypes = {
+    story: PropTypes.object.isRequired
   }
 
   // handler for input changes on the form
@@ -30,81 +35,46 @@ class WordSelectForm extends Component {
 
     console.log('Form Submitted')
 
-    const adjective_1 = this.state.adjective_1,
-    adjective_2 = this.state.adjective_2,
-    noun_1 = this.state.noun_1,
-    noun_2 =this.state.noun_2;
-
-    this.setState({
-      adjective_1: '',
-      adjective_2: '',
-      noun_1: '',
-      noun_2: ''
+    this.props.story.words.forEach((word) => {
+      const value = this.state[word.key]
+      // call back fxn to send to the parent
+      this.props.wordsSubmitCallback(word.key, value)
+      this.setState({
+        [word.key]: ''
+      });
     })
-    // call back fxn to send to the parent
-    this.props.wordsSubmitCallback('adjective_1', adjective_1)
-    this.props.wordsSubmitCallback('adjective_2', adjective_2)
-    this.props.wordsSubmitCallback('noun_1', noun_1)
-    this.props.wordsSubmitCallback('noun_2', noun_2)
   }
 
   // FORM NOTES:
   // W/ onInputChange and value --- every time the user types into the name input field the NewStudentForm's state is updated.
   render() {
-    return (
-      <div>
-      <form className="words-form" onSubmit={this.formSubmitted}>
+    // need to map over all words for a given story and generate word components
 
-      <div>
-      <label htmlFor="adjective_1">Adjective 1:</label>
-      <input
-      onChange={this.onInputChange}
-      value={this.state.name}
-      name="adjective_1"
-      placeholder="Adjective!"
-      />
-      </div>
+    const wordComponenets = this.props.story.words.map((word, index) => {
+      return (<div key= { index }>
+        <label htmlFor={word.key}>{word.label}:</label>
+        <input
+        onChange={this.onInputChange}
+        value={this.state[word.key]}
+        name={ word.key }
+        placeholder= { word.label }
+        />
+        </div>)
+      });
 
-      <div>
-      <label htmlFor="adjective_2">Adjective 2:</label>
-      <input
-      onChange={this.onInputChange}
-      value={this.state.name}
-      name="adjective_2"
-      placeholder="Adjective!"
-      />
-      </div>
-
-      <div>
-      <label htmlFor="noun_1">Noun 1:</label>
-      <input
-      onChange={this.onInputChange}
-      value={this.state.name}
-      name="noun_1"
-      placeholder="Noun!"
-      />
-      </div>
-
-      <div>
-      <label htmlFor="noun_2">Noun 2:</label>
-      <input
-      onChange={this.onInputChange}
-      value={this.state.name}
-      name="noun_2"
-      placeholder="Noun!"
-      />
-      </div>
-
-      <input
-      className="button success"
-      type="submit"
-      value="Submit Words"
-      />
-
-      </form>
-      </div>
-    );
+      return (
+        <div>
+        <form className="words-form" onSubmit={this.formSubmitted}>
+        { wordComponenets }
+        <input
+        className="button success"
+        type="submit"
+        value="Submit Words"
+        />
+        </form>
+        </div>
+      );
+    }
   }
-}
 
-export default WordSelectForm;
+  export default WordSelectForm;
