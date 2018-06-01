@@ -6,26 +6,32 @@ class MadlibForm extends Component {
     super(props);
 
     this.state = {
-      words: this.props.words
+      words: this.props.words,
+      visible: this.props.visible
     }
   }
 
   static propTypes = {
     words: PropTypes.array.isRequired,
     update: PropTypes.func.isRequired,
+    show: PropTypes.func.isRequired,
   }
 
+  onSubmit = (event) => {
+    event.preventDefault();
+    this.props.show()
+  }
 
 
   render() {
 
     const formComponents = this.state.words.map((word) => {
       return (
-        <div key={word.key}>
-            <label htmlFor={word.key}>{word.label}</label>
-            <input name={word.key} placeholder={word.label}
-            onChange={(event) => {this.props.update(word.key, event.target.value)}}
-            />
+        <div key = {word.key}>
+          <label htmlFor={ word.key }>{ word.label }</label>
+          <input name={ word.key }
+          onChange={ (event) => { this.props.update(word.key, event.target.value) } }
+          />
         </div>
       );
     });
@@ -33,9 +39,18 @@ class MadlibForm extends Component {
 
     return (
       <article>
+        <form
+          onSubmit={ this.onSubmit }
+          className="new-madlib-form">
 
-        {formComponents}
+          {formComponents}
 
+          <input
+            className="button success"
+            type="submit"
+            value="Get Madlib"
+          />
+        </form>
       </article>
     );
   }
