@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import MadLibs from '../madlibs/MadLibs.js';
 
 class Dropdown extends Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
 
     this.state = {
       value: 'Vacations'
@@ -15,35 +15,31 @@ class Dropdown extends Component {
     getStory: PropTypes.func.isRequired,
   }
 
-   // this.setState({value: event.target.value});
-
   changeValue = (event) => {
-    console.log(event.target.value);
+    console.log(this.state.value);
     this.setState({
       value: event.target.value
     });
 
-    let num;
-    for(let i=0; i<MadLibs.length; i++){
-      if(MadLibs[i].title === this.state.value){
-        num = i;
+    for(let i = 0; i < MadLibs.length; i++){
+      if(MadLibs[i].title === event.target.value){
+        this.props.getStory(i);
       }
     }
-    this.props.getStory(num)
   }
 
   render(){
     return(
       <select value={this.state.value} onChange = { this.changeValue }>
-      {
-        MadLibs.map((madlib)=>{
-          return(
-            <option key ={madlib.title} value = { madlib.title }>
-              { madlib.title }
-            </option>
-          );
-        })
-      }
+        {
+          MadLibs.map((madlib)=>{
+            return(
+              <option key ={madlib.title} value = { madlib.title }>
+                { madlib.title }
+              </option>
+            );
+          })
+        }
       </select>
     );
   }
