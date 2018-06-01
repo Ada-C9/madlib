@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 class MadLibsForm extends Component {
   static propTypes = {
     wordsNeeded: PropTypes.array.isRequired,
+    updateWordCallback: PropTypes.func.isRequired,
   };
 
   constructor (props) {
@@ -23,12 +24,14 @@ class MadLibsForm extends Component {
   }
 
   onFormSubmit = (event) => {
-    // event.preventDefault();
-    // call method in App.js passed through props that updates the value of the MadLibs
+    event.preventDefault();
+    for (let wordObject of this.state.wordsNeeded) {
+      this.props.updateWordCallback(wordObject.key, wordObject.value);
+    }
   }
 
   render() {
-    const wordInputs = this.props.wordsNeeded.map((wordObject) => {
+    const wordInputs = this.state.wordsNeeded.map((wordObject) => {
       return(<div>
         <input
         key={wordObject['key']}
@@ -38,7 +41,7 @@ class MadLibsForm extends Component {
     });
 
     return (
-      <form>
+      <form onSubmit={ this.onFormSubmit }>
         { wordInputs }
         <input type="submit" />
       </form>
