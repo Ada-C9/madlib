@@ -8,13 +8,29 @@ class WordsForm extends Component {
 
   // Decide how many input fields we need:
 
-onFieldChange = () => {
+  onFieldChange = (key, value) => {
+    this.props.updateWord(key, value);
+  }
 
-}
+  onSubmit = (event) => {
+    event.preventDefault();
+    this.props.showStory();
+  }
 
   render() {
 
-    const MadLib = this.props.madLib;
+    const words = this.props.words;
+    const inputTags = words.map((word) => {
+      return(
+        <section key={word.key}>
+        <label htmlFor="word">{word.label}</label>
+        <input
+        name={word.key}
+        onChange={(event) => { this.onFieldChange(word.key, event.target.value) }}
+        />
+        </section>
+      );
+    });
 
     return(
       <div>
@@ -23,26 +39,19 @@ onFieldChange = () => {
       className="new-words-form">
 
       <div>
-        <label htmlFor="word">Word:</label>
-        <input name="word"
-        onChange={(event) => {this.onFieldChange('word', event.target.value)}}
-        />
+      {inputTags}
       </div>
 
       <input
-        className="button"
-        type="submit"
-        value="See your Madlib"
+      className="button"
+      type="submit"
+      value="See your Madlib"
       />
 
       </form>
       </div>
     )
   }
-
-
-
-
 }
 
 export default WordsForm
