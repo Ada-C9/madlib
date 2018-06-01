@@ -7,7 +7,6 @@ class WordForm extends Component {
     super(props);
 
     this.state = {
-      label: this.props.words,
       word: ''
     }
   }
@@ -17,9 +16,9 @@ class WordForm extends Component {
   }
 
   onWordChange = (key, value) => {
-    const updatedState = [{}]
-    updatedState[0][key] = value
-    this.setState(updatedState)
+    this.setState({
+      word: value
+    })
     this.props.updateWord(key, value)
   }
 
@@ -31,12 +30,14 @@ class WordForm extends Component {
     }
 
 
+
+
   render() {
 
-    const printWordForm =     this.state.label.map((label) => {
+    const printWordForm =     this.props.words.map((label) => {
       return (<div>
       <label htmlFor={label.key}>{label.label}: </label>
-      <input name="word" onChange={(event) => { this.onWordChange('word', event.target.value)}}/>
+      <input name="word" onChange={(event) => { this.onWordChange(label.key), event.target.value}}/>
       </div>)
     });
 

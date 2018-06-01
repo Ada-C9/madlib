@@ -9,13 +9,13 @@ class App extends Component {
     super();
 
     this.state = {
-      selectedMadLib: MadLibs[0],
+      selectedMadLib: MadLibs[Math.floor(Math.random() * 4)],
     };
   }
 
   // Update the value of a word in the selected
   // mad lib using setState
-  updateWord(key, value) {
+  updateWord = (key, value) => {
     const updatedMadLib = this.state.selectedMadLib;
     const changedWord = updatedMadLib.words.find((word) => {
       return word.key === key
