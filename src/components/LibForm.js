@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import './LibForm.css';
-import PropTypes from 'prop-types';
 
 class LibForm extends Component {
 
   createForm = (selectedMadLib) => {
+    if (selectedMadLib === null) {
+      return <div></div>;
+    }
     const words = selectedMadLib["words"]
-    console.log(words);
     const fields = words.map((field) => {
       return (
         <div key={field.key}>

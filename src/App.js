@@ -3,19 +3,29 @@ import './App.css';
 import MadLibs from './madlibs/MadLibs.js';
 import Story from './components/Story.js';
 import LibForm from './components/LibForm.js';
+import Dropdown from './components/Dropdown.js';
+
 class App extends Component {
   constructor() {
     super();
 
     this.state = {
-      selectedMadLib: MadLibs[this.getRandomInt(4)],
+      selectedMadLib: null,
       storyCompleted: false,
+      storySelected: true,
     };
   }
 
   getRandomInt = (max) => {
     return Math.floor(Math.random() * Math.floor(max));
   }
+
+  selectedNum = (index) => {
+    this.setState({
+      selectedMadLib: MadLibs[index]
+    });
+  }
+
 
   // Update the value of a word in the selected
   // mad lib using setState
@@ -42,8 +52,13 @@ class App extends Component {
     return (
       <section className="App">
         <h1>Welcome to MadLibs!</h1>
-        <p>Fill in all of the choices to see your final story.</p>
-        {!this.state.storyCompleted &&
+        {!this.state.storyCompleted && <Dropdown
+          selectedNum={this.selectedNum}
+        />
+        }
+        {(!this.state.storyCompleted && this.state.selectedMadLib != null) && <p>Fill in all of the choices to see your final story.</p>
+        }
+        {(!this.state.storyCompleted && this.state.selectedMadLib != null) &&
           <LibForm
           selectedMadLib = {this.state.selectedMadLib}
           updateWord = {this.updateWord}
