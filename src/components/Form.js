@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class Form extends Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
   }
 
   static propTypes = {
     words: PropTypes.array.isRequired,
+    updateWord: PropTypes.func.isRequired,
   }
 
   generateForm(){
@@ -16,17 +17,28 @@ class Form extends Component {
         return(
           <div key={word.key}>
             <label htmlFor={word.key}>{word.label}:</label>
-            <input name={word.label}/>
+            <input
+              name = {word.label}
+              onChange = {
+                (event)=>{this.props.updateWord(word.key, event.target.value)}
+              }
+              // value = {this.state.words[word.key]}
+            />
           </div>
         );
       })
     );
   }
 
+  onSubmit = (event) => {
+    event.preventDefault();
+
+  }
+
   render(){
     return(
       <div>
-        <form>
+        <form onSubmit = { this.onSubmit }>
           { this.generateForm() }
           <input
             className="button success"

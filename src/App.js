@@ -11,12 +11,12 @@ class App extends Component {
     this.state = {
       selectedMadLib: MadLibs[0]
     };
-    console.log(this.state.selectedMadLib.words);
+    // console.log(this.state.selectedMadLib.words[0].key);
   }
 
   // Update the value of a word in the selected
   // mad lib using setState
-  updateWord(key, value) {
+  updateWord = (key, value) => {
     const updatedMadLib = this.state.selectedMadLib;
     const changedWord = updatedMadLib.words.find((word) => {
       return word.key === key
@@ -24,6 +24,8 @@ class App extends Component {
     changedWord.value = value;
     this.setState({selectedMadLib: updatedMadLib});
   }
+
+  // Function to render either the form OR the result
 
   render() {
     return (
@@ -34,12 +36,16 @@ class App extends Component {
           Render your form with input values
         */}
 
-        <Form words={this.state.selectedMadLib.words}/>
+        <Form
+          words = { this.state.selectedMadLib.words }
+          updateWord = { this.updateWord }
+        />
 
         <Story
-          title={ this.state.selectedMadLib.title }
-          text={ this.state.selectedMadLib.getText() }
-          />
+          title = { this.state.selectedMadLib.title }
+          text = { this.state.selectedMadLib.getText() }
+        />
+
       </section>
     );
   }
