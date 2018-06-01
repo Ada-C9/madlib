@@ -11,40 +11,42 @@ class NewMadLibForm extends Component {
       title: props.title,
     };
   }
-
+  //prob need to replace onFieldChange with app.js updateWord function already written
   onFieldChange = (key, value) => {
     const updatedState = {}
     updatedState[key] = value;
 
     this.setState(updatedState);
     console.log(`Updated = ${key}`);
+    console.log(value)
   }
 
   onSubmit = (event) => {
     event.preventDefault();
 
     this.setState({
-      noun_1: this.state.noun_1
+      //aw update with values in form fields? do I even need this if I use the updateWord function from app.js?
     })
   }
 
   render() {
-    console.log(this.state)
+    const libs = this.state.words.map(function(lib, index) {
+      return <div>
+              <label htmlFor={ lib.key }>{ lib.key }</label>
+              <input name={ lib.key } placeholder={ lib.key } onChange={(event) => { this.onFieldChange(`${lib.key}`, event.target.value) }}
+              value=""
+              />
+
+             </div>
+    });
+
     return (
       <div>
         <form
           onSubmit={ this.onSubmit } className="new-madlib-form"
         >
           <div>
-            <label htmlFor={this.props.words[0].key}>
-            {this.props.words[0].key}:
-            </label>
-            <input
-              name={this.props.words[0].key}
-              placeholder={this.props.words[0].key}
-              onChange={(event) => { this.onFieldChange('noun_1', event.target.value) }}
-              value={this.state.words[0].value}
-            />
+            {libs}
           </div>
           <input
             className="button"
