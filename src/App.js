@@ -9,27 +9,19 @@ class App extends Component {
   constructor() {
     super();
 
+    const libsLength = MadLibs.length
+    let selection = this.getRandomInt(0, libsLength)
+
     this.state = {
-      selectedMadLib: MadLibs[0],
-      wordList:  [
-          {
-            "key": "adjective_1",
-            "label": "Adjective 1"
-          },
-          {
-            "key": "adjective_2",
-            "label": "Adjective 2"
-          },
-          {
-            "key": "noun_1",
-            "label": "Noun 1"
-          },
-          {
-            "key": "noun_2",
-            "label": "Noun 2"
-          }
-        ]
+      selectedMadLib: MadLibs[selection],
     };
+  }
+
+
+  getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
   }
 
   // Update the value of a word in the selected
@@ -53,7 +45,7 @@ class App extends Component {
         {/*
           Render your form with input values
         */}
-        <MadlibForm words={this.state.wordList} />
+        <MadlibForm words={this.state.selectedMadLib.words} />
           <Story title={ this.state.selectedMadLib.title }
           text={ this.state.selectedMadLib.getText() }
           />

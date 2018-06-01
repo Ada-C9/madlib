@@ -21,7 +21,7 @@ class MadlibForm extends Component {
     const formComponents = this.state.words.map((word) => {
       return (
         <div key={word.label}>
-            <label htmlFor="name">{word.key}</label>
+            <label htmlFor="name">{word.label}</label>
             <input
               name="name"
               placeholder={word.label}
