@@ -12,19 +12,19 @@ class MadlibForm extends Component {
 
   static propTypes = {
     words: PropTypes.array.isRequired,
+    update: PropTypes.func.isRequired,
   }
+
 
 
   render() {
 
-
     const formComponents = this.state.words.map((word) => {
       return (
-        <div key={word.label}>
-            <label htmlFor="name">{word.label}</label>
-            <input
-              name="name"
-              placeholder={word.label}
+        <div key={word.key}>
+            <label htmlFor={word.key}>{word.label}</label>
+            <input name={word.key} placeholder={word.label}
+            onChange={(event) => {this.props.update(word.key, event.target.value)}}
             />
         </div>
       );
