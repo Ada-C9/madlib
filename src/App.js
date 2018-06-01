@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import MadLibs from './madlibs/MadLibs.js';
 import Story from './components/Story.js';
+import WordForm from './components/WordForm.js';
 
 class App extends Component {
   constructor() {
@@ -32,7 +33,7 @@ class App extends Component {
     <div key={key}>
       <label htmlFor="field">{word.label}:</label>
       <input
-        name="wordinput"
+        name={"wordinput"}
         onChange={this.onUpdateWord}
         value={this.state.word}
         wordlabel= {word.label} />
