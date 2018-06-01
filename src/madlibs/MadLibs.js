@@ -1,4 +1,4 @@
-export default [
+let MadLibs = [
   {
     title: "Vacations",
     getWord: function(key) {
@@ -172,3 +172,5 @@ export default [
     ]
   }
 ]
+
+export default MadLibs;
