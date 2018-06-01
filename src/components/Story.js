@@ -7,7 +7,7 @@ class Story extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
-  }
+  };
 
   render() {
     return (
