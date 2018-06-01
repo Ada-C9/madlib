@@ -27,11 +27,15 @@ class App extends Component {
   onFormSubmit = () => {
     this.setState({
       status: true
-    })
+    });
+  }
+
+  onNewGame = () => {
+    window.location.reload();
   }
 
   display = () => {
-    let status = this.state.status
+    let status = this.state.status;
     if (status === false) {
       return (
         <div>
@@ -43,23 +47,28 @@ class App extends Component {
           onFormSubmit={this.onFormSubmit}
         />
         </div>
-
     )} else {
-      return (<Story
-        title={ this.state.selectedMadLib.title }
-        text={ this.state.selectedMadLib.getText() }
-        />)
-    }
+      return (
+        <div>
+          <Story
+            title={ this.state.selectedMadLib.title }
+            text={ this.state.selectedMadLib.getText() }
+          />
+        </div>
+      )}
   }
 
   render() {
     console.log(this.state.selectedMadLib.title);
+    const title = this.state.selectedMadLib.title;
     return (
       <div>
-      <section className="App">
-      <h1>Welcome to MadLibs!</h1>
-      {this.display()}
-      </section>
+        <section className="App">
+        <h1>Welcome to MadLibs!</h1>
+        <h2>Play: {title}</h2>
+        <h2><button onClick={this.onNewGame}>Random New Game</button></h2>
+        {this.display()}
+        </section>
       </div>
     );
   }

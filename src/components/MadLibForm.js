@@ -11,11 +11,11 @@ class MadLibForm extends Component {
 
   onSubmit = (event) => {
     event.preventDefault();
-    this.props.onFormSubmit()
+    this.props.onFormSubmit();
   }
 
   onWordChange = (key, value) => {
-    this.props.updateWord(key, value)
+    this.props.updateWord(key, value);
   }
 
   render() {
@@ -29,7 +29,7 @@ class MadLibForm extends Component {
         />
         </div>
       )
-    })
+    });
 
     return (
       <div>
