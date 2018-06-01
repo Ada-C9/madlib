@@ -48,9 +48,10 @@ class App extends Component {
           Render your form with input values
         */
 
-        < WordsInput
-          wordsArray = {this.getWords()}
-        />
+          < WordsInput
+            words = {this.getWords()}
+            updateMadLib = {this.updateWord}
+          />
 
         }
         <Story
