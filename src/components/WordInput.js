@@ -4,13 +4,6 @@ import PropTypes from 'prop-types';
 
 class WordInput extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      wordInput: ""
-    };
-  }
-
   static propTypes = {
     label: PropTypes.string.isRequired,
     wordKey: PropTypes.string.isRequired,
@@ -18,11 +11,7 @@ class WordInput extends Component {
   };
 
   onInputChange = (event) => {
-    this.setState({
-      wordInput: event.target.value
-    });
-
-    this.props.onFieldChange(this.props.wordKey, this.state.wordInput);
+    this.props.onFieldChange(this.props.wordKey, event.target.value);
   };
 
   render() {
