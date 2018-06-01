@@ -7,24 +7,22 @@ class FormField extends Component {
   static propTypes = {
     formLabel: PropTypes.string.isRequired,
     index: PropTypes.number.isRequired,
-    onFormFieldChange: PropTypes.func.isRequired
+    onFieldChange: PropTypes.func.isRequired
   };
 
-  onFormValueChange = (value) => {
-    if(this.hasValidInput(value)) {
-      this.props.onFormFieldChange(this.props.index, value.trim());
-    }
+  onValueChange = (value) => {
+    // if(this.hasNonEmptyInput(value)) {
+      this.props.onFieldChange(this.props.index, value.trim());
+    // }
   };
 
-  hasValidInput = (value) => {
-    return value.match(/\w+?/);
-  };
+
 
   render() {
     return (
       <section className="form-field">
         <label htmlFor={this.props.formLabel}>{this.props.formLabel}</label>
-        <input onChange={(event) => { this.onFormValueChange(event.target.value) }} //
+        <input onChange={(event) => { this.onValueChange(event.target.value) }} //
                type="text"
                // className={this.fieldValid() ? 'valid': 'invalid'}
         />

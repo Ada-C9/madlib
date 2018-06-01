@@ -5,14 +5,20 @@ label {
   width: 200px;
 }
 input[type=text]:focus {
-  background-color: #fefea2;
+  background-color: #FFF2D7;
 }
 
 input[type=text], select {
+  /*width: 100%;*/
+  /*margin: 8px 0;*/
+  box-sizing: border-box;
+  border: 1px solid #555;
+  outline: none;
   padding: 2px 5px;
   display: inline-block;
-  border: 1px solid #ccc;
+  /*border: 1px solid #ccc;*/
   border-radius: 4px;
-  box-sizing: border-box;
   font-size: 12pt;
+  /*outline: none;*/
+
 }

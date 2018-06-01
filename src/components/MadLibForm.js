@@ -13,23 +13,33 @@ class MadLibForm extends Component {
     updateWord: PropTypes.func.isRequired,
   };
 
-  onFormFieldChange = (index, value) => {
+  onFieldChange = (index, value) => {
     const updatedWords = this.state.words;
     updatedWords[index].value = value;
     this.setState({words: updatedWords});
-    console.log(`Updated = ${index} ${value}`);
+    // console.log(`Updated = ${index} ${value}`);
   };
 
   onSubmit = (event) => {
     event.preventDefault();
-    this.state.words.map((word) => { return this.props.updateWord(word.key, word.value) });
+    if (this.hasCompletedMadLib()) {
+      this.state.words.map((word) => { return this.props.updateWord(word.key, word.value) });
+    }
   };
+
+  hasCompletedMadLib = () => {
+    return this.state.words.every(this.hasInput);
+  };
+
+  hasInput(inputField) {
+    return inputField.value !== undefined && inputField.value.match(/\w+?/);
+  }
 
   render() {
     const formFields = this.state.words.map((word, index) => {
       return (
         <FormField key = {word.key}
-                   onFormFieldChange = {this.onFormFieldChange}
+                   onFieldChange = {this.onFieldChange}
                    formLabel={word.label}
                    index = { index }
         />
