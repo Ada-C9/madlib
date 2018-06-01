@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
 import './LibForm.css';
+import PropTypes from 'prop-types';
+
 
 class LibForm extends Component {
+
+  static propTypes = {
+    updateWord: PropTypes.func.isRequired,
+    completeStory: PropTypes.func.isRequired,
+    selectedMadLib: PropTypes.object
+  }
+
 
   createForm = (selectedMadLib) => {
     if (selectedMadLib === null) {

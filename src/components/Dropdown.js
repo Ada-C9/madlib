@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Dropdown extends Component {
+
+  static propTypes = {
+    selectedNum: PropTypes.func.isRequired,
+  }
 
   handleChange = (event) => {
    this.props.selectedNum(event.target.value)
