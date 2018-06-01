@@ -40,10 +40,10 @@ class InputForm extends React.Component {
     const inputFields = madLib.words.map((word, index) => {
       return (
         <div key={index}>
-          <label htmlFor={word.key}>{word.label}</label>
           <input
             type='text'
             name={word.key}
+            placeholder={word.label}
             value={this.state[word.key]}
             onChange={this.inputChangeHandler}
           />
