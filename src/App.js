@@ -25,16 +25,22 @@ class App extends Component {
   }
 
   render() {
-    
+    const forms = this.state.selectedMadLib.words.map((form, index) => {
+      return (
+        <Form
+          key={ index }
+          label={form.label}
+        />
+      );
+    });
+
 
     return (
       <section className="App">
         <h1>Welcome to MadLibs!</h1>
         <p>Fill in all of the choices to see your final story.</p>
-        {/*
-          Render your form with input values
-        */}
-        <Form/>
+        { forms }
+
         <Story
           title={ this.state.selectedMadLib.title }
           text={ this.state.selectedMadLib.getText() }

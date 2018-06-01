@@ -11,7 +11,10 @@ class Form extends Component {
 
     return (
       <div>
-
+        <form>
+          <label htmlFor="label">{this.props.label}</label>
+          <input/>
+        </form>
       </div>
     );
   }
