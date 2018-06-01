@@ -3,13 +3,14 @@ import './App.css';
 import MadLibs from './madlibs/MadLibs.js';
 import Story from './components/Story.js';
 import Form from './components/Form.js'
+import Dropdown from './components/Dropdown.js'
 
 class App extends Component {
   constructor() {
     super();
 
     this.state = {
-      selectedMadLib: MadLibs[Math.floor((Math.random() * 4))],
+      selectedMadLib: MadLibs[0],
       showForm: 'show',
       showStory: 'hide'
     };
@@ -33,11 +34,23 @@ class App extends Component {
     });
   }
 
+  getStory = (num) => {
+    this.setState({
+      selectedMadLib: MadLibs[num]
+    });
+  }
+
   render() {
     return (
       <section className="App">
         <h1>Welcome to MadLibs!</h1>
         <p>Fill in all of the choices to see your final story.</p>
+
+        <div>
+          <Dropdown
+            getStory = { this.getStory }
+          />
+        </div>
 
         <div className = {this.state.showForm}>
           <Form
