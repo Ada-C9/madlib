@@ -9,7 +9,8 @@ class App extends Component {
     super();
 
     this.state = {
-      selectedMadLib: MadLibs[0]
+      // Will only work if * 4, there are only 4 different stories to chose from
+      selectedMadLib: MadLibs[Math.floor(Math.random() * 4 )],
     };
     this.updateWord = this.updateWord.bind(this);
   }
