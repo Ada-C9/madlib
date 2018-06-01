@@ -17,20 +17,28 @@ class StorySelector extends Component {
           index: PropTypes.number.isRequired
         }
       )).isRequired,
+      setStoryIndex: PropTypes.func.isRequired
   };
 
-  seeData = () => {
-    console.log(this.props.stories)
+  changeStory = (event) => {
+    this.setState({
+      selectedStory: event.target.value
+    });
+
+    this.props.setStoryIndex(event.target.value);
   }
+
+  // seeData = () => {
+  //   console.log(this.props.stories)
+  // }
 
   render() {
     const options = this.props.stories.map(function(story) {
-      return <option key={ story.index }>{ story.title }</option>
+      return <option key={ story.index } value={ story.index }>{ story.title }</option>
     });
 
     return(
-        <select value={this.state.value} onChange={this.changeStory}>
-          { this.seeData() }
+        <select onChange={this.changeStory}>
           { options }
         </select>
     );

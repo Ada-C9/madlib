@@ -44,13 +44,19 @@ class App extends Component {
     });
     console.log(stories)
     return stories;
-  }
+  };
+
+  setStory = (storyIndex) => {
+    this.setState({
+      selectedMadLib: MadLibs[storyIndex]
+    });
+  };
 
   render() {
     return (
       <section className="App">
         <h1>Welcome to MadLibs!</h1>
-        <StorySelector stories={this.findStories()}/>
+        <StorySelector stories={this.findStories()} setStoryIndex={ this.setStory }/>
         <p>Fill in all of the choices to see your final story.</p>
         <div className={ this.state.submitted ? "hidden" : "" }>
           <MadLibForm
