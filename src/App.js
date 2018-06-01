@@ -2,19 +2,23 @@ import React, { Component } from 'react';
 import './App.css';
 import MadLibs from './madlibs/MadLibs.js';
 import Story from './components/Story.js';
+import WordForm from './components/WordForm';
+import Menu from './components/Menu'
 
 class App extends Component {
   constructor() {
     super();
 
     this.state = {
-      selectedMadLib: MadLibs[0]
+      selectedMadLib: MadLibs[Math.floor(Math.random() * 4)],
+      submitted: false,
     };
+
   }
 
   // Update the value of a word in the selected
   // mad lib using setState
-  updateWord(key, value) {
+  updateWord = (key, value) => {
     const updatedMadLib = this.state.selectedMadLib;
     const changedWord = updatedMadLib.words.find((word) => {
       return word.key === key
@@ -23,18 +27,32 @@ class App extends Component {
     this.setState({selectedMadLib: updatedMadLib});
   }
 
+  submitted = () => {
+    this.setState({
+      submitted: true
+    })
+  }
+
+
+  display = () => {
+    if (this.state.submitted) {
+      return (<Story
+      title={ this.state.selectedMadLib.title }
+      text={ this.state.selectedMadLib.getText() }
+      />)
+    }
+    else {
+      return (<div><p>Fill in all of the choices to see your final story.</p>
+        <WordForm updateWord={this.updateWord} words={this.state.selectedMadLib.words} submitted={this.submitted}/></div>)
+    }
+  }
+
   render() {
+
     return (
       <section className="App">
         <h1>Welcome to MadLibs!</h1>
-        <p>Fill in all of the choices to see your final story.</p>
-        {/*
-          Render your form with input values
-        */}
-        <Story
-          title={ this.state.selectedMadLib.title }
-          text={ this.state.selectedMadLib.getText() }
-          />
+        {this.display()}
       </section>
     );
   }
