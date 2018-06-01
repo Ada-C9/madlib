@@ -31,6 +31,9 @@ class App extends Component {
         {
           <MadLibForm
             words={this.state.selectedMadLib.words}
+            updateWord = {
+              this.updateWord
+            }
           />
         }
         <Story
