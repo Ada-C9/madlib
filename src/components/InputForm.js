@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 class InputForm extends React.Component {
   static propTypes = {
     madlib: PropTypes.object.isRequired,
+    submitHandler: PropTypes.func.isRequired
   }
 
   constructor(props) {
@@ -28,6 +29,12 @@ class InputForm extends React.Component {
     this.setState(updatedState);
   }
 
+  onSubmitClick = (event) => {
+    event.preventDefault();
+    const submittedWords = Object.assign({}, this.state);
+    this.props.submitHandler(submittedWords);
+  }
+
   render () {
     const madLib = this.props.madlib;
     const inputFields = madLib.words.map((word, index) => {
@@ -45,7 +52,7 @@ class InputForm extends React.Component {
     })
 
     return(
-      <form id='input-form'>
+      <form id='input-form' onSubmit={this.onSubmitClick}>
         {inputFields}
         <input type='submit' value='Submit Words' />
       </form>
