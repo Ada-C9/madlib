@@ -3,11 +3,6 @@ import PropTypes from 'prop-types';
 import './madLibsForm.css'
 
 class MadLibsForm extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-
   handleFormSubmit = (event) => {
     event.preventDefault();
 
@@ -28,7 +23,7 @@ class MadLibsForm extends Component {
 
     console.log(this.props);
     return (
-      <div>
+      <div className="words-form-wrapper">
         <form className="words-form" onSubmit={this.handleFormSubmit}>
           { storyInputs }
           <input
@@ -43,3 +38,8 @@ class MadLibsForm extends Component {
 }
 
 export default MadLibsForm;
+
+MadLibsForm.propTypes = {
+  words: PropTypes.array,
+  updateWord: PropTypes.func,
+}
