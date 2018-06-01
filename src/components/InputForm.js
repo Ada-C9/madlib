@@ -24,7 +24,7 @@ export default class InputForm extends Component {
     }
 
   // onFormSubmit = (event) => {
-  
+
   // }
 
 
@@ -36,7 +36,7 @@ export default class InputForm extends Component {
       let label = word.label;
       return <div key={key}>
           <label htmlFor={label}>{label}</label>
-          <input name={key} value={this.state[key]} onChange={this.onInputChange}/>
+          <input name={key} value={this.state[key] || ''} onChange={this.onInputChange}/>
       </div>;
     });
 

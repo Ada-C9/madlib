@@ -26,6 +26,10 @@ class App extends Component {
     this.setState({selectedMadLib: updatedMadLib});
   }
 
+  showMadLib = () => {
+    const newState = this.state;
+  }
+
   foo = 3;
 
   render() {
