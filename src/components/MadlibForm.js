@@ -7,7 +7,6 @@ class MadlibForm extends Component {
 
     this.state = {
       words: this.props.words,
-      visible: this.props.visible
     }
   }
 
@@ -28,7 +27,7 @@ class MadlibForm extends Component {
     const formComponents = this.state.words.map((word) => {
       return (
         <div key = {word.key}>
-          <label htmlFor={ word.key }>{ word.label }</label>
+          <label htmlFor={ word.key }>{ word.label }: </label>
           <input name={ word.key }
           onChange={ (event) => { this.props.update(word.key, event.target.value) } }
           />
