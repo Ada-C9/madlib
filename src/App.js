@@ -13,17 +13,6 @@ class App extends Component {
     };
   }
 
-  showStory = () => {
-    const madLib = this.state.selectedMadLib;
-
-    madLib.words.forEach((word) => {
-      if (madLib.getWord(word.key) === undefined) {
-        return false;
-      }
-      return true;
-    });
-  }
-
   // Update the value of a word in the selected
   // mad lib using setState
   updateWord(key, value) {
@@ -41,17 +30,26 @@ class App extends Component {
     }
   }
 
-  render() {
-    let story = null;
-    if (this.showStory()) {
-      <Story title={this.state.selectedMadLib.title} text={this.state.selectedMadLib.getText()} />
+  showStory = () => {
+    const allFilled = this.state.selectedMadLib.words.every((word) => {
+      return (word.value !== undefined)
+    });
+
+    if (allFilled){
+      return (<Story
+        title={ this.state.selectedMadLib.title }
+        text={ this.state.selectedMadLib.getText() }
+      />)
     }
+  }
+
+  render() {
     return (
       <section className="App">
         <h1>Welcome to MadLibs!</h1>
         <p>Fill in all of the choices to see your final story.</p>
         <InputForm madlib={this.state.selectedMadLib} submitHandler={this.submitHandler}/>
-        {story}
+        {this.showStory()}
       </section>
     );
   }
