@@ -9,7 +9,7 @@ class App extends Component {
     super();
 
     this.state = {
-      selectedMadLib: MadLibs[0]
+      selectedMadLib: MadLibs[Math.floor(Math.random() * MadLibs.length)]
     };
 
     this.updateWord = this.updateWord.bind(this)
