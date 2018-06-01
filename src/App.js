@@ -7,8 +7,10 @@ class App extends Component {
   constructor() {
     super();
 
+    // Get a random index of an array
+    // Math.radom() returns a random num between 0 and 1, so we multiply that number by our length in order to get a random float and then we round it with Math.floor to the nearest whole num
     this.state = {
-      selectedMadLib: MadLibs[0]
+      selectedMadLib: MadLibs[Math.floor(Math.random()*MadLibs.length)]
     };
   }
 
