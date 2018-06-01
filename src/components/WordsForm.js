@@ -6,18 +6,17 @@ class WordsForm extends Component {
 
   constructor() {
     super();
-
     this.state = {
       // for disabling button until form is comleted:
-      canBeSubmitted: 0
+      disableSubmitButton: true
     };
   }
 
   static propTypes = {
-  updateWord: PropType.func.isRequired,
-  changeDisplay: PropType.func.isRequired,
-  words: PropType.array.isRequired,
-}
+    updateWord: PropType.func.isRequired,
+    changeDisplay: PropType.func.isRequired,
+    words: PropType.array.isRequired,
+  }
 
   onFieldChange = (key, value) => {
     this.props.updateWord(key, value);
@@ -31,13 +30,21 @@ class WordsForm extends Component {
 
   onSubmit = (event) => {
     event.preventDefault();
-
-    // this.setState({
-    //   canBeSubmitted: 0
-    // });
-
+    // show story and hide form:
     this.props.changeDisplay();
   }
+
+// Decide if submiti button is enabled or not:
+  validadeAllInputsCompleted = () => {
+    let disable = false;
+    this.props.words.map((word) => {
+      if (!word.value) {
+        disable = true
+      }
+    });
+    return disable
+  }
+
 
   render() {
 
@@ -48,7 +55,8 @@ class WordsForm extends Component {
         <label htmlFor="word">{word.label}</label>
         <input
         name={word.key}
-        onChange={(event) => { this.onFieldChange(word.key, event.target.value) }}
+        onChange={(event) => { this.onFieldChange(word.key, event.target.value)
+        }}
         />
         </section>
       );
@@ -66,7 +74,7 @@ class WordsForm extends Component {
 
       <input
       className='button'
-      disabled={this.state.canBeSubmitted === this.props.words.length ? false : true}
+      disabled={this.validadeAllInputsCompleted()}
       type="submit"
       value="See your Madlib"
       />
