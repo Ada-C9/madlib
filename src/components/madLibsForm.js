@@ -8,10 +8,9 @@ class MadLibsForm extends Component {
 
   }
 
-
   render(){
     const storyInputs = this.props.words.map((words, index) =>{
-      console.log(words.key);
+      
       return (
         <input
         placeholder= { words.label }
@@ -21,7 +20,6 @@ class MadLibsForm extends Component {
       );
     });
 
-    console.log(this.props);
     return (
       <div className="words-form-wrapper">
         <form className="words-form" onSubmit={this.handleFormSubmit}>
