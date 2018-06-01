@@ -30,10 +30,10 @@ class App extends Component {
         <h1>Welcome to MadLibs!</h1>
         <p>Fill in all of the choices to see your final story.</p>
         <InputForm madlib={this.state.selectedMadLib}/>
-        <Story
+        {/*<Story
           title={ this.state.selectedMadLib.title }
           text={ this.state.selectedMadLib.getText() }
-          />
+          />*/}
       </section>
     );
   }

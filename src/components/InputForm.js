@@ -14,11 +14,18 @@ class InputForm extends React.Component {
   getMadLibFields = (ml) => {
     const madLibObject = {};
 
-    ml.words.map((word) => {
+    ml.words.forEach((word) => {
       madLibObject[word.key] = '';
     });
 
     return madLibObject;
+  }
+
+  inputChangeHandler = (event) => {
+    const updatedState = {};
+    updatedState[event.target.name] = event.target.value;
+
+    this.setState(updatedState);
   }
 
   render () {
@@ -27,7 +34,12 @@ class InputForm extends React.Component {
       return (
         <div key={index}>
           <label htmlFor={word.key}>{word.label}</label>
-          <input type='text' name={word.key} value={this.state[word.key]}/>
+          <input
+            type='text'
+            name={word.key}
+            value={this.state[word.key]}
+            onChange={this.inputChangeHandler}
+          />
         </div>
       )
     })
