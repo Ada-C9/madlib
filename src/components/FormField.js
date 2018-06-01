@@ -9,7 +9,7 @@ class FormField extends Component {
     this.state = {
       formKey: this.props.formKey,
       formLabel: this.props.formLabel,
-      formInput: ""
+      value: ""
     };
   }
 
@@ -22,18 +22,18 @@ class FormField extends Component {
 
   onFormValueChange = (value) => {
 
-    console.log('bar');
-    console.log(value);
-    console.log(this.state);
-    console.log('*');
-    const updatedState = {};
-    updatedState[this.state.formInput] = value;
-    this.setState({formInput: value});
+    // console.log('bar');
+    // console.log(value);
+    // console.log(this.state);
+    // console.log('*');
+    // const updatedState = {};
+    // updatedState[this.state.value] = value;
+    this.setState({value: value});
 
     // console.log(`Updated = ${key} ${value}`);
     // console.log(this.props.formLabel);
-    // this.state.formInput = event.target.value;
-    // this.props.onFormFieldChange(this.props.index, event.target.value);
+    // this.state.value = event.target.value;
+    this.props.onFormFieldChange(this.props.index, value);
   };
 
   render() {
@@ -45,7 +45,7 @@ class FormField extends Component {
         <input onChange={(event) => { this.onFormValueChange(event.target.value) }} //
                type="text"
                // name={this.props.formKey}
-               value={this.state.formInput}
+               value={this.state.value}
           // onChange={(event) => { this.props.onFormFieldChange(this.props.index, event.target.value) }}
           // className={this.emailValid() ? 'valid': 'invalid'}
         />

@@ -11,10 +11,12 @@ class App extends Component {
     this.state = {
       selectedMadLib: MadLibs[0]
     };
+    this.updateWord = this.updateWord.bind(this);
   }
 
   // Update the value of a word in the selected mad lib using setState
   updateWord(key, value) {
+    console.log(this.state);
     const updatedMadLib = this.state.selectedMadLib;
     const changedWord = updatedMadLib.words.find((word) => {
       return word.key === key
@@ -31,9 +33,7 @@ class App extends Component {
         {
           <MadLibForm
             words={this.state.selectedMadLib.words}
-            updateWord = {
-              this.updateWord
-            }
+            updateWord={this.updateWord}
           />
         }
         <Story
