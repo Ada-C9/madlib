@@ -10,8 +10,8 @@ class App extends Component {
     let selected = (Math.floor(Math.random() * 4));
     this.state = {
       selectedMadLib: MadLibs[selected],
+      status: false
     };
-    console.log(this.state.selectedMadLib.words)
   }
 
   // Update the value of a word in the selectedmad lib using setState
@@ -24,21 +24,43 @@ class App extends Component {
     this.setState({ selectedMadLib: updatedMadLib });
   }
 
-  render() {
-    console.log(this.state.selectedMadLib.title);
-    return (
-      <section className="App">
-        <h1>Welcome to MadLibs!</h1>
+  onFormSubmit = () => {
+    this.setState({
+      status: true
+    })
+  }
+
+  display = () => {
+    let status = this.state.status
+    if (status === false) {
+      return (
+        <div>
         <p>Fill in all of the choices to see your final story.</p>
         <MadLibForm
           updateWord={this.updateWord}
-          data= {this.state.selectedMadLib.words}
+          data={this.state.selectedMadLib.words}
+          status={this.state.status}
+          onFormSubmit={this.onFormSubmit}
         />
-        <Story
-          title={ this.state.selectedMadLib.title }
-          text={ this.state.selectedMadLib.getText() }
-          />
+        </div>
+
+    )} else {
+      return (<Story
+        title={ this.state.selectedMadLib.title }
+        text={ this.state.selectedMadLib.getText() }
+        />)
+    }
+  }
+
+  render() {
+    console.log(this.state.selectedMadLib.title);
+    return (
+      <div>
+      <section className="App">
+      <h1>Welcome to MadLibs!</h1>
+      {this.display()}
       </section>
+      </div>
     );
   }
 }

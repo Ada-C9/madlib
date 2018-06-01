@@ -4,11 +4,14 @@ import PropTypes from 'prop-types';
 class MadLibForm extends Component {
   static propTypes = {
     data: PropTypes.array.isRequired,
-    updateWord: PropTypes.func.isRequired
+    updateWord: PropTypes.func.isRequired,
+    status: PropTypes.bool.isRequired,
+    onFormSubmit: PropTypes.func.isRequired
   }
 
   onSubmit = (event) => {
     event.preventDefault();
+    this.props.onFormSubmit()
   }
 
   onWordChange = (key, value) => {
@@ -30,10 +33,10 @@ class MadLibForm extends Component {
 
     return (
       <div>
-        <form
-          onSubmit={this.onSubmit}
-          className="new-madlib-form">
+        <form onSubmit={this.onSubmit}className="new-madlib-form">
         {labels}
+        <br/>
+        <button>Submit</button>
         </form>
         <br/>
       </div>
