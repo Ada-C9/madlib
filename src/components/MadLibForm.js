@@ -29,7 +29,6 @@ class MadLibForm extends Component {
     const formFields = this.state.words.map((word, index) => {
       return (
         <FormField key = {word.key}
-                   // formKey={word.key}
                    onFormFieldChange = {this.onFormFieldChange}
                    formLabel={word.label}
                    index = { index }
@@ -43,7 +42,9 @@ class MadLibForm extends Component {
           onSubmit={this.onSubmit}
           className="madlib-form-form"
         >
-          {formFields}
+          <section className="form-field-outer-section">
+            {formFields}
+          </section>
           <input
             className="button success"
             type="submit"
