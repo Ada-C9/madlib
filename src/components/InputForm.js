@@ -6,20 +6,28 @@ class InputForm extends React.Component {
     madlib: PropTypes.object.isRequired,
   }
 
-  constructor () {
+  constructor(props) {
     super();
-    this.state = {
+    this.state = this.getMadLibFields(props.madlib);
+  }
 
-    }
+  getMadLibFields = (ml) => {
+    const madLibObject = {};
+
+    ml.words.map((word) => {
+      madLibObject[word.key] = '';
+    });
+
+    return madLibObject;
   }
 
   render () {
-    const madLib = this.props.madlib
+    const madLib = this.props.madlib;
     const inputFields = madLib.words.map((word, index) => {
       return (
         <div key={index}>
           <label htmlFor={word.key}>{word.label}</label>
-          <input type='text' name={word.key}/>
+          <input type='text' name={word.key} value={this.state[word.key]}/>
         </div>
       )
     })
