@@ -31,14 +31,14 @@ class WordsInput extends Component {
   onSubmit = (event) => {
   event.preventDefault();
 
-  const madLibInfo = {
-    adjective_1: this.state.adjective_1,
-    adjective_2: this.state.adjective_2,
-    noun_1: this.state.noun_1,
-    noun_2: this.state.noun_2,
-  }
-  
-  this.props.updateWord(madLibInfo);
+  // const madLibInfo = {
+  //   adjective_1: this.state.adjective_1,
+  //   adjective_2: this.state.adjective_2,
+  //   noun_1: this.state.noun_1,
+  //   noun_2: this.state.noun_2,
+  // }
+
+  this.props.updateWord('adjective_1', `test`);
 
   this.setState({
     adjective_1: '',
@@ -54,42 +54,38 @@ class WordsInput extends Component {
       <div>
 
       <div>
-      <form  onSubmit={ this.onSubmit } className="new-student-form">
+        <form  onSubmit={this.onSubmit}>
       <div>
       <p>
-      <label htmlFor="adjective_1">adjective_1:</label>
-      <input
-      adjective_1 = "adjective_1"
-      onChange={(event) => { this.onFieldChange('adjective_1', event.target.value)}}
-      value=''
-      />
+        <label htmlFor="adjective_1">adjective_1:</label>
+        <input
+        adjective_1 = "adjective_1"
+        onChange={(event) => { this.onFieldChange('adjective_1', event.target.value)}}
+        />
       </p>
 
       <p>
-      <label htmlFor="adjective_2">adjective_2:</label>
-      <input
-      adjective_2 = "adjective_2"
-      onChange={(event) => { this.onFieldChange('adjective_2', event.target.value)}}
-      value=''
-      />
+        <label htmlFor="adjective_2">adjective_2:</label>
+        <input
+        adjective_2 = "adjective_2"
+        onChange={(event) => { this.onFieldChange('adjective_2', event.target.value)}}
+        />
       </p>
 
       <p>
-      <label htmlFor="noun_1">noun_1: </label>
-      <input
-      noun_1 = "noun_1"
-      onChange={(event) => { this.onFieldChange('noun_1', event.target.value)}}
-      value=''
-      />
+        <label htmlFor="noun_1">noun_1: </label>
+        <input
+        noun_1 = "noun_1"
+        onChange={(event) => { this.onFieldChange('noun_1', event.target.value)}}
+        />
       </p>
 
       <p>
-      <label htmlFor="noun_2">noun_2: </label>
-      <input
-      noun_2 = "noun_2"
-      onChange={(event) => { this.onFieldChange('noun_2', event.target.value)}}
-      value=''
-      />
+        <label htmlFor="noun_2">noun_2: </label>
+        <input
+        noun_2 = "noun_2"
+        onChange={(event) => { this.onFieldChange('noun_2', event.target.value)}}
+        />
       </p>
 
       <input
@@ -100,8 +96,6 @@ class WordsInput extends Component {
       </div>
       </form>
       </div>
-      {this.props.words}
-      {this.props.updateWord}
       </div>
     );
   }
