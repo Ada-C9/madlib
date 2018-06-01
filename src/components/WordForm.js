@@ -6,7 +6,8 @@ class WordForm extends Component {
 
 
   static propTypes = {
-    updateWord: PropTypes.func.isRequired
+    updateWord: PropTypes.func.isRequired,
+    submitted: PropTypes.func.isRequired
   }
 
   onWordChange = (key, value) => {

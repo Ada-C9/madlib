@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import MadLibs from './madlibs/MadLibs.js';
 import Story from './components/Story.js';
-import WordForm from './components/WordForm'
+import WordForm from './components/WordForm';
+import Menu from './components/Menu'
 
 class App extends Component {
   constructor() {
@@ -31,6 +32,7 @@ class App extends Component {
       submitted: true
     })
   }
+
 
   display = () => {
     if (this.state.submitted) {
