@@ -10,9 +10,26 @@ class MadLibForm extends Component {
     };
   }
   render() {
+    const formFields = this.state.words.map((word, index) => {
+      return (
+        <FormField key={word.key}
+                   // onSomeShit = {
+                   //   this.onSomeShit
+                   // }
+                   formLabel={word.label}
+        />
+      );
+    });
+
+
     return (
       <section className="madlib-form">
-
+        <form
+          // onSubmit={ this.onSubmit }
+          // className="???"
+        >
+          {formFields}
+        </form>
       </section>
     );
   }
