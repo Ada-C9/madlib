@@ -22,7 +22,7 @@ class Form extends Component {
               onChange = {
                 (event)=>{this.props.updateWord(word.key, event.target.value)}
               }
-              // value = {this.state.words[word.key]}
+              value = {this.props.words[word.key]}
             />
           </div>
         );
@@ -32,7 +32,7 @@ class Form extends Component {
 
   onSubmit = (event) => {
     event.preventDefault();
-
+    this.props.changeState();
   }
 
   render(){

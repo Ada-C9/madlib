@@ -9,7 +9,9 @@ class App extends Component {
     super();
 
     this.state = {
-      selectedMadLib: MadLibs[0]
+      selectedMadLib: MadLibs[0],
+      showForm: 'show',
+      showStory: 'hide'
     };
     // console.log(this.state.selectedMadLib.words[0].key);
   }
@@ -26,25 +28,34 @@ class App extends Component {
   }
 
   // Function to render either the form OR the result
+  changeState = () => {
+    this.setState({
+      showForm: 'hide',
+      showStory: 'show'
+    });
+  }
 
   render() {
     return (
       <section className="App">
         <h1>Welcome to MadLibs!</h1>
         <p>Fill in all of the choices to see your final story.</p>
-        {/*
-          Render your form with input values
-        */}
 
-        <Form
-          words = { this.state.selectedMadLib.words }
-          updateWord = { this.updateWord }
-        />
+        <div className = {this.state.showForm}>
+          <Form
+            words = { this.state.selectedMadLib.words }
+            updateWord = { this.updateWord }
+            changeState = { this.changeState }
+          />
+        </div>
 
-        <Story
-          title = { this.state.selectedMadLib.title }
-          text = { this.state.selectedMadLib.getText() }
-        />
+        <div className = {this.state.showStory}>
+          <Story
+            title = { this.state.selectedMadLib.title }
+            text = { this.state.selectedMadLib.getText() }
+          />
+        </div>
+
 
       </section>
     );
