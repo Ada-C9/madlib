@@ -11,7 +11,7 @@ class WordsInput extends Component {
   render() {
     return (
       <div>
-        {`this is the array of words: ${this.props.words}`}
+        {`this is the array of words: ${this.props.wordsArray}`}
       </div>
     );
   }

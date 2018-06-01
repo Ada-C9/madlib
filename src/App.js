@@ -49,7 +49,7 @@ class App extends Component {
         */
 
         < WordsInput
-          wordsArray = {this.getWords}
+          wordsArray = {this.getWords()}
         />
 
         }
