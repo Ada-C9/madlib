@@ -24,7 +24,10 @@ class App extends Component {
     this.setState({selectedMadLib: updatedMadLib});
   }
 
+
+
   render() {
+
     return (
       <section className="App">
         <h1>Welcome to MadLibs!</h1>

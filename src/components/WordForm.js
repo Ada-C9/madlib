@@ -3,9 +3,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class WordForm extends Component {
-  constructor(props) {
-    super(props);
-
+  constructor() {
+    super();
     this.state = {
       word: ''
     }
@@ -25,7 +24,7 @@ class WordForm extends Component {
   onSubmit = (event) => {
     event.preventDefault();
       this.setState({
-        words: ''
+        word: ''
       })
     }
 
@@ -37,7 +36,7 @@ class WordForm extends Component {
     const printWordForm =     this.props.words.map((label) => {
       return (<div>
       <label htmlFor={label.key}>{label.label}: </label>
-      <input name="word" onChange={(event) => { this.onWordChange(label.key), event.target.value}}/>
+      <input name="word" onChange={(event) => { this.onWordChange(label.key, event.target.value)}}/>
       </div>)
     });
 
