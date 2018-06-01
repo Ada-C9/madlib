@@ -14,7 +14,7 @@ class WordsForm extends Component {
 
   onSubmit = (event) => {
     event.preventDefault();
-    this.props.showStory();
+    this.props.changeDisplay();
   }
 
   render() {

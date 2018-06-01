@@ -10,8 +10,10 @@ class App extends Component {
     super();
 
     this.state = {
-      // selectedMadLib: MadLibs[0]
-      selectedMadLib: MadLibs[Math.floor(Math.random() * MadLibs.length)]
+      // generate random:
+      selectedMadLib: MadLibs[Math.floor(Math.random() * MadLibs.length)],
+      // hide story until submit button is calles:
+      storyActive: false
     };
   }
 
@@ -24,33 +26,48 @@ class App extends Component {
       return word.key === key
     });
     changedWord.value = value;
-    this.setState({selectedMadLib: updatedMadLib});
+    this.setState({
+      selectedMadLib: updatedMadLib
+    });
   }
 
-  showStory = () => {
-    // console.log("working");
-    let element = document.getElementById("story");
-    console.log(element);
-    element.classList.remove("hidden");
+  // Generate a different madLib:
+  playAgain = () => {
+    // event.preventDefault();
+    this.setState({
+      selectedMadLib: MadLibs[Math.floor(Math.random() * MadLibs.length)],
+      storyActive: !this.state.storyActive
+    });
+    // this.changeDisplay;
   }
+
+  // Show or hide story:
+  changeDisplay = () => {
+    const currentState = this.state.storyActive;
+    this.setState({
+      storyActive: !currentState
+    });
+  };
 
   render() {
     return (
       <section className="App">
       <h1>Welcome to MadLibs!</h1>
-      <p>Fill in all of the choices to see your final story.</p>
-      {
-        /*  Render your form with input values */
-        <WordsForm
-        words={this.state.selectedMadLib.words} updateWord={this.updateWord}
-        showStory={this.showStory}
-        />}
 
-        <div id="story" className="hidden">
-        <Story
-        title={ this.state.selectedMadLib.title }
-        text={ this.state.selectedMadLib.getText() }
-        />
+      <div className={this.state.storyActive ? 'hidden': 'show'}>
+      <p>Fill in all of the choices to see your final story.</p>
+         {<WordsForm
+            words={this.state.selectedMadLib.words} updateWord={this.updateWord}
+            changeDisplay={this.changeDisplay}
+          />}
+        </div>
+
+        <div className={this.state.storyActive ? 'show': 'hidden'}>
+          <Story
+            title={ this.state.selectedMadLib.title }
+            text={ this.state.selectedMadLib.getText() }
+          />
+          <button onClick={this.playAgain}> Play Again </button>
         </div>
 
         </section>
