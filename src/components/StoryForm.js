@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import './NewStudentForm.css';
+import './StoryForm.css';
 
 
 class StoryForm extends Component {
@@ -46,7 +46,7 @@ class StoryForm extends Component {
 
   onSubmit = (event) => {
     event.preventDefault();
-      this.props.addStudent({
+      this.props.addWords({
         adjective_1: this.state.adjective_1,
         adjective_2: this.state.adjective_2,
         noun_1: this.state.noun_1,
@@ -66,7 +66,6 @@ class StoryForm extends Component {
       <form
       onSubmit={this.onSubmit}
       className="new-word-form">
-      <p>Word Form:</p>
       <div>
       <label htmlFor="adjective_1">Adjective 1:</label>
       <input
@@ -76,27 +75,35 @@ class StoryForm extends Component {
       />
       </div>
       <div>
-      <label htmlFor="age">Age:</label>
+      <label htmlFor="adjective_2">Adjective 2:</label>
       <input
-      age="age"
-      onChange={(event) => {this.onFieldChange('age', event.target.value)}}
-      value={this.state.age}
+      adjective_2="adjective_2"
+      onChange={(event) => {this.onFieldChange('adjective_1', event.target.value)}}
+      value={this.state.adjective_1}
       />
       </div>
       <div>
-      <label htmlFor="email">Email:</label>
+      <label htmlFor="noun_1">Noun 1:</label>
       <input
-      email="email"
+      noun_1="noun_1"
       // onChange={this.onEmailChange}
-      onChange={(event) => {this.onFieldChange('email', event.target.value)}}
-      value={this.state.email}
-      className={this.emailValid() ? "valid" : "invalid"}
+      onChange={(event) => {this.onFieldChange('', event.target.value)}}
+      value={this.state.noun_1}
+      // className={this.emailValid() ? "valid" : "invalid"}
+      />
+      </div>
+      <div>
+      <label htmlFor="noun_2">Noun 2:</label>
+      <input
+      noun_2="noun_2"
+      onChange={(event) => {this.onFieldChange('adjective_1', event.target.value)}}
+      value={this.state.noun_2}
       />
       </div>
       <input
       className="button success"
       type="submit"
-      value="Add Student"
+      value="Apply to Madlib Story"
       />
       </form>
       </div>
@@ -105,4 +112,4 @@ class StoryForm extends Component {
 }
 
 
-export default NewStudentForm;
+export default StoryForm;
