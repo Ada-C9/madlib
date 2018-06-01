@@ -11,7 +11,13 @@ class FormField extends Component {
   };
 
   onFormValueChange = (value) => {
-    this.props.onFormFieldChange(this.props.index, value);
+    if(this.hasValidInput(value)) {
+      this.props.onFormFieldChange(this.props.index, value.trim());
+    }
+  };
+
+  hasValidInput = (value) => {
+    return value.match(/\w+?/);
   };
 
   render() {
