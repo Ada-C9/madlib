@@ -3,11 +3,6 @@ import './LibForm.css';
 import PropTypes from 'prop-types';
 
 class LibForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    }
-  }
 
   createForm = (selectedMadLib) => {
     const words = selectedMadLib["words"]
@@ -24,13 +19,17 @@ class LibForm extends Component {
     return fields
   }
 
+  submitStory = (event) => {
+    event.preventDefault();
+    this.props.completeStory();
+  }
+
   render() {
     return (
       <div>
-      <form>
+      <form onSubmit={this.submitStory}>
         {this.createForm(this.props.selectedMadLib)}
         <input type='submit' value='Create Story' />
-
       </form>
       </div>
     );

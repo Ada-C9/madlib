@@ -9,6 +9,7 @@ class App extends Component {
 
     this.state = {
       selectedMadLib: MadLibs[this.getRandomInt(4)],
+      storyCompleted: false,
     };
   }
 
@@ -27,19 +28,37 @@ class App extends Component {
     this.setState({selectedMadLib: updatedMadLib});
   }
 
+  completeStory = () => {
+    this.setState({
+      storyCompleted: true
+    });
+  }
+
+  refreshPage = () => {
+    window.location.reload();
+  }
+
   render() {
     return (
       <section className="App">
         <h1>Welcome to MadLibs!</h1>
         <p>Fill in all of the choices to see your final story.</p>
-        <LibForm
+        {!this.state.storyCompleted &&
+          <LibForm
           selectedMadLib = {this.state.selectedMadLib}
           updateWord = {this.updateWord}
-        />
-        <Story
+          completeStory = {this.completeStory}
+          />
+        }
+        {this.state.storyCompleted &&
+          <Story
           title={ this.state.selectedMadLib.title }
           text={ this.state.selectedMadLib.getText() }
           />
+        }
+        {this.state.storyCompleted &&
+          <button type="button" onClick={ this.refreshPage }> <span>Play Again</span> </button>
+        }
       </section>
     );
   }
