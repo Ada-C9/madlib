@@ -12,7 +12,7 @@ class App extends Component {
     this.state = {
       // generate random:
       selectedMadLib: MadLibs[Math.floor(Math.random() * MadLibs.length)],
-      // hide story until submit button is calles:
+      // hide story and show form until submit button is called:
       storyActive: false
     };
   }
@@ -31,16 +31,6 @@ class App extends Component {
     });
   }
 
-  // Generate a different madLib:
-  playAgain = () => {
-    // event.preventDefault();
-    this.setState({
-      selectedMadLib: MadLibs[Math.floor(Math.random() * MadLibs.length)],
-      storyActive: !this.state.storyActive
-    });
-    // this.changeDisplay;
-  }
-
   // Show or hide story:
   changeDisplay = () => {
     const currentState = this.state.storyActive;
@@ -56,18 +46,17 @@ class App extends Component {
 
       <div className={this.state.storyActive ? 'hidden': 'show'}>
       <p>Fill in all of the choices to see your final story.</p>
-         {<WordsForm
-            words={this.state.selectedMadLib.words} updateWord={this.updateWord}
-            changeDisplay={this.changeDisplay}
-          />}
+      {<WordsForm
+        words={this.state.selectedMadLib.words} updateWord={this.updateWord}
+        changeDisplay={this.changeDisplay}
+        />}
         </div>
 
         <div className={this.state.storyActive ? 'show': 'hidden'}>
-          <Story
-            title={ this.state.selectedMadLib.title }
-            text={ this.state.selectedMadLib.getText() }
-          />
-          <button onClick={this.playAgain}> Play Again </button>
+        <Story
+        title={ this.state.selectedMadLib.title }
+        text={ this.state.selectedMadLib.getText() }
+        />
         </div>
 
         </section>
@@ -76,3 +65,16 @@ class App extends Component {
   }
 
   export default App;
+
+
+  // // Generate a different madLib:
+  // playAgain = () => {
+  //   // event.preventDefault();
+  //   this.setState({
+  //     selectedMadLib: MadLibs[Math.floor(Math.random() * MadLibs.length)],
+  //     storyActive: !this.state.storyActive
+  //   });
+  //   // this.changeDisplay;
+  // }
+  // ...inside form:
+  // <button onClick={this.playAgain}> Play Again </button>
