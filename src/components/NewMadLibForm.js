@@ -5,9 +5,10 @@ import PropTypes from 'prop-types';
 class NewMadLibForm extends Component {
   constructor(props) {
     super(props);
-    console.log(props)
+
     this.state = {
-      words: props.words
+      words: props.words,
+      title: props.title,
     };
   }
 
@@ -22,6 +23,9 @@ class NewMadLibForm extends Component {
   onSubmit = (event) => {
     event.preventDefault();
 
+    this.setState({
+      noun_1: this.state.noun_1
+    })
   }
 
   render() {
@@ -31,22 +35,23 @@ class NewMadLibForm extends Component {
         <form
           onSubmit={ this.onSubmit } className="new-madlib-form"
         >
-        <div>
-          <label htmlFor={"noun_1"}>
-            Adjective 1:
-          </label>
+          <div>
+            <label htmlFor={this.props.words[0].key}>
+            {this.props.words[0].key}:
+            </label>
+            <input
+              name={this.props.words[0].key}
+              placeholder={this.props.words[0].key}
+              onChange={(event) => { this.onFieldChange('noun_1', event.target.value) }}
+              value={this.state.words[0].value}
+            />
+          </div>
           <input
-            name="noun_1"
-            placeholder="noun"
-            onChange={(event) => { this.onFieldChange('noun_1', event.target.value) }}
-            value={this.state.noun_1}
+            className="button"
+            type="submit"
+            value="MadLib!!"
           />
-        </div>
-
         </form>
-        <p>
-          { this.props.title }
-        </p>
       </div>
     );
   }

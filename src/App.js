@@ -37,6 +37,7 @@ class App extends Component {
         */
         <NewMadLibForm
           words={ this.state.selectedMadLib.words }
+          title={ this.state.selectedMadLib.title }
         />
         }
         <Story
