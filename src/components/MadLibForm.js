@@ -21,8 +21,8 @@ class MadLibForm extends Component {
   };
 
   onFieldChange = (key, value) => {
-    const updatedWords = this.state.words
-    updatedWords[key] = value
+    const updatedWords = this.state.words;
+    updatedWords[key] = value;
 
     this.setState(updatedWords);
   }
