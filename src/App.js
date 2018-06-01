@@ -8,8 +8,7 @@ class App extends Component {
     super();
 
     this.state = {
-      selectedMadLib: MadLibs[0]
-    };
+      selectedMadLib: MadLibs[Math.floor(Math.random() * MadLibs.length)]  };
   }
 
   // Update the value of a word in the selected
