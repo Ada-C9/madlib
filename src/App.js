@@ -14,8 +14,9 @@ class App extends Component {
 
   // Update the value of a word in the selected
   // mad lib using setState
-  updateWord(key, value) {
+  updateWord=(key, value) => {
     const updatedMadLib = this.state.selectedMadLib;
+
     const changedWord = updatedMadLib.words.find((word) => {
       return word.key === key
     });
@@ -23,21 +24,45 @@ class App extends Component {
     this.setState({selectedMadLib: updatedMadLib});
   }
 
+
+
   render() {
-    return (
-      <section className="App">
-        <h1>Welcome to MadLibs!</h1>
-        <p>Fill in all of the choices to see your final story.</p>
-        {/*
-          Render your form with input values
-        */}
-        <Story
-          title={ this.state.selectedMadLib.title }
-          text={ this.state.selectedMadLib.getText() }
-          />
-      </section>
-    );
-  }
+    console.log('formelement')
+    const formelement = this.state.selectedMadLib.words.map((word, key) =>
+    <div key={key}>
+      <label htmlFor="field">{word.label}:</label>
+      <input
+        name="wordinput"
+        onChange={this.onUpdateWord}
+        value={this.state.word}
+        wordlabel= {word.label} />
+    </div>
+  );
+
+
+
+  return (
+    <section className="App">
+      <h1>Welcome to MadLibs!</h1>
+      <p>Fill in all of the choices to see your final story.</p>
+
+
+
+      <form className="form">
+        {formelement}
+
+        <input type="submit" value="Submit MadLibs" />
+      </form>
+
+
+
+      <Story
+        title={ this.state.selectedMadLib.title }
+        text={ this.state.selectedMadLib.getText() }
+      />
+    </section>
+  );
+}
 }
 
 export default App;
