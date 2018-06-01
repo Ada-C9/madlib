@@ -8,8 +8,14 @@ class App extends Component {
     super();
 
     this.state = {
-      selectedMadLib: MadLibs[0]
+      selectedMadLib: this.getMadLibsState()
     };
+  }
+
+  getMadLibsState() {
+    let madLib = Math.round(Math.random() * (MadLibs.length - 1))
+
+    return MadLibs[madLib];
   }
 
   // Update the value of a word in the selected
