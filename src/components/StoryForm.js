@@ -6,23 +6,39 @@ class StoryForm extends Component {
 
   static propTypes = {
     updateWord: PropTypes.func.isRequired,
+    words: PropTypes.func.isRequired,
   };
 
   onFieldChange = (key, value) => {
       this.props.updateWord(key, value);
    };
+
+  onSubmit = (event) => {
+      event.preventDefault();
+
+    };
+
   render() {
+    let words = this.props.words;
+    let inputs = words.map((word) => {
+          return (
+           <section key={word.key}
+           className="label-input">
+             <label>{word.label}</label>
+             <input
+              name={word.key}
+              onChange={(event) => { this.onFieldChange(word.key, event.target.value) }}
+              />
+           </section>
+         );
+       });
     return (
-      <section>
-        <form className="story-form">
-          <label placeholder="Adjective 1"></label>
-          <input
-          name="adjective_1"
-          onChange={(event) => { this.onFieldChange('adjective_1', event.target.value) }}
-          />
-          <input type ="submit"/>
+        <form className="story-form"
+        onSubmit = {this.onSubmit}
+          >
+          {inputs}
+          <input type ="submit" className="button"/>
         </form>
-      </section>
     );
   }
 }

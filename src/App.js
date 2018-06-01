@@ -9,10 +9,11 @@ class App extends Component {
     super();
 
     this.state = {
-      selectedMadLib: MadLibs[0]
+      selectedMadLib: MadLibs[0],
+      isStoryVisible: false,
     };
 
-    this.updateWord = this.updateWord.bind(this)
+    this.updateWord = this.updateWord.bind(this);
   }
   // Update the value of a word in the selected
   // mad lib using setState
@@ -22,8 +23,32 @@ class App extends Component {
       return word.key === key
     });
     changedWord.value = value;
-    this.setState({selectedMadLib: updatedMadLib});
+    this.setState({ selectedMadLib: updatedMadLib });
   }
+
+  changeStory = () => {
+     this.setState({
+       isStoryVisible: true,
+     });
+}
+
+showStory = () => {
+    if (this.state.isStoryVisible) {
+      return(
+        <Story
+          title={ this.state.selectedMadLib.title }
+          text={ this.state.selectedMadLib.getText() }
+          />
+      );
+    }
+  };
+
+  hideStory = () => {
+    this.setState({
+      isStoryVisible: false,
+    });
+
+}
 
   render() {
     return (
@@ -32,6 +57,7 @@ class App extends Component {
         <p>Fill in all of the choices to see your final story.</p>
         <StoryForm
           updateWord={this.updateWord}
+          words = {this.state.selectedMadLib.words}
         />
         <Story
           title={ this.state.selectedMadLib.title }
