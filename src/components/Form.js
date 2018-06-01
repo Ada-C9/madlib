@@ -9,6 +9,7 @@ class Form extends Component {
   static propTypes = {
     words: PropTypes.array.isRequired,
     updateWord: PropTypes.func.isRequired,
+    changeDisplayState: PropTypes.func.isRequired
   }
 
   generateForm(){
@@ -32,8 +33,7 @@ class Form extends Component {
 
   onSubmit = (event) => {
     event.preventDefault();
-    this.props.changeState();
-
+    this.props.changeDisplayState();
   }
 
   render(){

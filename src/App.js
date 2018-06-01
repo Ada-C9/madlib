@@ -13,7 +13,6 @@ class App extends Component {
       showForm: 'show',
       showStory: 'hide'
     };
-    // console.log(this.state.selectedMadLib.words[0].key);
   }
 
   // Update the value of a word in the selected
@@ -27,8 +26,7 @@ class App extends Component {
     this.setState({selectedMadLib: updatedMadLib});
   }
 
-  // Function to render either the form OR the result
-  changeState = () => {
+  changeDisplayState = () => {
     this.setState({
       showForm: 'hide',
       showStory: 'show'
@@ -45,7 +43,7 @@ class App extends Component {
           <Form
             words = { this.state.selectedMadLib.words }
             updateWord = { this.updateWord }
-            changeState = { this.changeState }
+            changeDisplayState = { this.changeDisplayState }
           />
         </div>
 
