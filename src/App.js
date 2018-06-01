@@ -9,8 +9,19 @@ class App extends Component {
     super();
 
     this.state = {
-      selectedMadLib: MadLibs[0]
+      selectedMadLib: MadLibs[0],
     };
+  }
+
+  showStory = () => {
+    const madLib = this.state.selectedMadLib;
+
+    madLib.words.forEach((word) => {
+      if (madLib.getWord(word.key) === undefined) {
+        return false;
+      }
+      return true;
+    });
   }
 
   // Update the value of a word in the selected
@@ -31,15 +42,16 @@ class App extends Component {
   }
 
   render() {
+    let story = null;
+    if (this.showStory()) {
+      <Story title={this.state.selectedMadLib.title} text={this.state.selectedMadLib.getText()} />
+    }
     return (
       <section className="App">
         <h1>Welcome to MadLibs!</h1>
         <p>Fill in all of the choices to see your final story.</p>
         <InputForm madlib={this.state.selectedMadLib} submitHandler={this.submitHandler}/>
-        <Story
-          title={ this.state.selectedMadLib.title }
-          text={ this.state.selectedMadLib.getText() }
-          />
+        {story}
       </section>
     );
   }
