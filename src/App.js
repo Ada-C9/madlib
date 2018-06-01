@@ -9,7 +9,8 @@ class App extends Component {
     super();
     this.state = {
       selectedMadLib: MadLibs[0],
-      words: {}
+      words: {},
+      submitted: false
     };
   }
 
@@ -28,6 +29,8 @@ class App extends Component {
     for (let field in words) {
       this.updateWord(field, words[field]);
     }
+    const submitted = !this.state.submitted
+    this.setState({ submitted });
   };
 
   render() {
@@ -35,14 +38,18 @@ class App extends Component {
       <section className="App">
         <h1>Welcome to MadLibs!</h1>
         <p>Fill in all of the choices to see your final story.</p>
-        <MadLibForm
-          wordTypes={this.state.selectedMadLib.words}
-          setWords={this.updateWords}
-        />
-        <Story
-          title={ this.state.selectedMadLib.title }
-          text={ this.state.selectedMadLib.getText() }
+        <div className={ this.state.submitted ? "hidden" : "" }>
+          <MadLibForm
+            wordTypes={this.state.selectedMadLib.words}
+            setWords={this.updateWords}
           />
+        </div>
+        <div className={ this.state.submitted ? "" : "hidden" }>
+          <Story
+            title={ this.state.selectedMadLib.title }
+            text={ this.state.selectedMadLib.getText() }
+            />
+          </div>
       </section>
     );
   }
