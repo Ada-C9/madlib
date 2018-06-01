@@ -9,7 +9,7 @@ class App extends Component {
     super();
 
     this.state = {
-      selectedMadLib: MadLibs[0],
+      selectedMadLib: MadLibs[Math.floor((Math.random() * 4))],
       showForm: 'show',
       showStory: 'hide'
     };
@@ -55,7 +55,6 @@ class App extends Component {
             text = { this.state.selectedMadLib.getText() }
           />
         </div>
-
 
       </section>
     );
