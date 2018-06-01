@@ -6,41 +6,31 @@ import './MadLibForm.css';
 class MadLibForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      words: this.props.words
-    };
+    this.state = {words: this.props.words};
   }
 
   static propTypes = {
     updateWord: PropTypes.func.isRequired,
   };
+
   onFormFieldChange = (index, value) => {
-    // console.log(key);
-    console.log('foo');
     const updatedWords = this.state.words;
     updatedWords[index].value = value;
     this.setState({words: updatedWords});
-
     console.log(`Updated = ${index} ${value}`);
   };
 
   onSubmit = (event) => {
     event.preventDefault();
-
-    this.state.words.map((word) => {
-      this.props.updateWord(word.key, word.value)
-    });
+    this.state.words.map((word) => { return this.props.updateWord(word.key, word.value) });
   };
 
   render() {
     const formFields = this.state.words.map((word, index) => {
-      // console.log(word.key);
       return (
         <FormField key = {word.key}
-                   formKey={word.key}
-                   onFormFieldChange = {
-                     this.onFormFieldChange
-                   }
+                   // formKey={word.key}
+                   onFormFieldChange = {this.onFormFieldChange}
                    formLabel={word.label}
                    index = { index }
         />
@@ -50,7 +40,7 @@ class MadLibForm extends Component {
     return (
       <section className="madlib-form">
         <form
-          onSubmit={ this.onSubmit }
+          onSubmit={this.onSubmit}
           className="madlib-form-form"
         >
           {formFields}
