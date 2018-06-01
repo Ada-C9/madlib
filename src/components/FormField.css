@@ -1,18 +1,18 @@
-
-/*.form-field {*/
-  /*display: grid;*/
-  /**/
-/*}*/
-
-/*.form-field {*/
-  /*display: grid;*/
-  /**/
-/*}*/
 label {
   float: left;
   text-align: right;
   margin-right: 15px;
   width: 200px;
+}
+input[type=text]:focus {
+  background-color: #fefea2;
+}
 
-  /*width: 150px;*/
+input[type=text], select {
+  padding: 2px 5px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 12pt;
 }
