@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 
 class MadLibForm extends React.Component {
   static propTypes = {
-    words: PropTypes.array.isRequired
+    words: PropTypes.array.isRequired,
+    updateWordCallback: PropTypes.func.isRequired
   }
 
   constructor(props) {
@@ -15,14 +16,44 @@ class MadLibForm extends React.Component {
     this.state = initialState;
   }
 
+  onInputChange = (event) => {
+    const newState = {};
+    newState[event.target.name] = event.target.value;
+    this.setState(newState);
+    console.log(this.state);
+  }
+
+
+  onFormSubmit = (event) => {
+    event.preventDefault();
+    const keys = Object.keys(this.state);
+
+
+    keys.forEach((key) => {
+      this.props.updateWordCallback(key, this.state[key]);
+    });
+
+  }
+
+
   render() {
+    const formInputs = this.props.words.map((word, index) => {
+      return (
+        <div>
+        <input name={ word.key }
+               type='text'
+               placeholder={ word.label }
+               value={ this.state[index] }
+               onChange={ this.onInputChange }
+        />
+        </div>
+      );
+    });
 
     return(
-      <form>
-        <input name={ this.props.words[0].key }
-               type='text'
-               placeholder={ this.props.words[0].label }
-        />
+      <form onSubmit={this.onFormSubmit}>
+        { formInputs }
+        <input type='submit' value='Create MadLib'/>
       </form>
     );
   }
