@@ -3,33 +3,20 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class WordForm extends Component {
-  constructor() {
-    super();
-    this.state = {
-      word: ''
-    }
-  }
+
 
   static propTypes = {
     updateWord: PropTypes.func.isRequired
   }
 
   onWordChange = (key, value) => {
-    this.setState({
-      word: value
-    })
     this.props.updateWord(key, value)
   }
 
   onSubmit = (event) => {
     event.preventDefault();
-      this.setState({
-        word: ''
-      })
+    this.props.submitted()
     }
-
-
-
 
   render() {
 

@@ -10,7 +10,9 @@ class App extends Component {
 
     this.state = {
       selectedMadLib: MadLibs[Math.floor(Math.random() * 4)],
+      submitted: false,
     };
+
   }
 
   // Update the value of a word in the selected
@@ -24,19 +26,31 @@ class App extends Component {
     this.setState({selectedMadLib: updatedMadLib});
   }
 
+  submitted = () => {
+    this.setState({
+      submitted: true
+    })
+  }
 
+  display = () => {
+    if (this.state.submitted) {
+      return (<Story
+      title={ this.state.selectedMadLib.title }
+      text={ this.state.selectedMadLib.getText() }
+      />)
+    }
+    else {
+      return (<div><p>Fill in all of the choices to see your final story.</p>
+        <WordForm updateWord={this.updateWord} words={this.state.selectedMadLib.words} submitted={this.submitted}/></div>)
+    }
+  }
 
   render() {
 
     return (
       <section className="App">
         <h1>Welcome to MadLibs!</h1>
-        <p>Fill in all of the choices to see your final story.</p>
-        <WordForm updateWord={this.updateWord} words={this.state.selectedMadLib.words}/>
-        <Story
-          title={ this.state.selectedMadLib.title }
-          text={ this.state.selectedMadLib.getText() }
-          />
+        {this.display()}
       </section>
     );
   }
