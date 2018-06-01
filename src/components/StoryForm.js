@@ -6,47 +6,21 @@ import './StoryForm.css';
 class StoryForm extends Component {
   constructor() {
     super();
-    this.state = {
-      adjective_1: '',
-      adjective_2: '',
-      noun_1: '',
-      noun_2: '',
-    };
+
+
   }
 
   static propTypes = {
-    addWords: PropTypes.func.isRequired,
+    selectedMadLib: Proptypes.object.isRequired,
+    updateWord: Proptypes.func.isRequired,
   }
 
-  onFieldChange = (key, value) => {
-    const updatedState = {}
-    updatedState[key] = value;
-    this.setState(updatedState);
-    console.log('updated = ${key}');
-  }
 
-  // onAgeChange = (event) => {
-  //   const age = event.target.value;
-  //   this.setState({
-  //     age,
-  //   });
-  // }
-  //
-  // see the email to see the other way to
-  // onEmailChange = (event) => {
-  //   const email = event.target.value;
-  //   this.setState({
-  //     email,
-  //   });
-  // }
 
-  // emailValid = () => {
-  //   return this.state.email.match(/\S+@\S+/);
-  // }
 
   onSubmit = (event) => {
     event.preventDefault();
-      this.props.addWords({
+      this.props.updateWord({
         adjective_1: this.state.adjective_1,
         adjective_2: this.state.adjective_2,
         noun_1: this.state.noun_1,
@@ -60,7 +34,24 @@ class StoryForm extends Component {
       });
   }
 
+
+  // selectedMadLib.words.each(key, label)
+
   render() {
+
+    let words = this.props.words;
+    let inputs = words.map((word) => {
+          return(
+            <section key={word.key} className="label-input">
+              <label>{word.label}</label>
+              <input
+               name={word.key}
+               onChange={(event) => { this.onFieldChange(word.key, event.target.value) }}
+               
+            </section>
+          );
+
+
     return (
       <div>
       <form
@@ -70,7 +61,7 @@ class StoryForm extends Component {
       <label htmlFor="adjective_1">Adjective 1:</label>
       <input
       name="adjective_1"
-      onChange={(event) => {this.onFieldChange('adjective_1', event.target.value)}}
+      onChange={(event) => {this.updateWord('adjective_1', event.target.value)}}
       value={this.state.adjective_1}
       />
       </div>

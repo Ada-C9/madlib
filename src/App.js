@@ -3,6 +3,7 @@ import './App.css';
 import MadLibs from './madlibs/MadLibs.js';
 import Story from './components/Story.js';
 import StoryForm from './components/StoryForm.js'
+import PropTypes from 'prop-types';
 
 class App extends Component {
   constructor() {
@@ -17,7 +18,7 @@ class App extends Component {
 
   // Update the value of a word in the selected
   // mad lib using setState
-  updateWord(key, value) {
+  updateWord = (key, value) => {
     const updatedMadLib = this.state.selectedMadLib;
     const changedWord = updatedMadLib.words.find((word) => {
       return word.key === key
@@ -34,7 +35,8 @@ class App extends Component {
         {
           // Render your form with input values
         <StoryForm
-          addWords={this.addWords}
+          words={this.selectedMadlib.words}
+          updateWord={this.updateWord}
         />
         }
         <Story
