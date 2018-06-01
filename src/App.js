@@ -2,13 +2,33 @@ import React, { Component } from 'react';
 import './App.css';
 import MadLibs from './madlibs/MadLibs.js';
 import Story from './components/Story.js';
+import MadlibForm from './components/MadlibForm.js';
+
 
 class App extends Component {
   constructor() {
     super();
 
     this.state = {
-      selectedMadLib: MadLibs[0]
+      selectedMadLib: MadLibs[0],
+      wordList:  [
+          {
+            "key": "adjective_1",
+            "label": "Adjective 1"
+          },
+          {
+            "key": "adjective_2",
+            "label": "Adjective 2"
+          },
+          {
+            "key": "noun_1",
+            "label": "Noun 1"
+          },
+          {
+            "key": "noun_2",
+            "label": "Noun 2"
+          }
+        ]
     };
   }
 
@@ -23,7 +43,9 @@ class App extends Component {
     this.setState({selectedMadLib: updatedMadLib});
   }
 
+
   render() {
+
     return (
       <section className="App">
         <h1>Welcome to MadLibs!</h1>
@@ -31,8 +53,8 @@ class App extends Component {
         {/*
           Render your form with input values
         */}
-        <Story
-          title={ this.state.selectedMadLib.title }
+        <MadlibForm words={this.state.wordList} />
+          <Story title={ this.state.selectedMadLib.title }
           text={ this.state.selectedMadLib.getText() }
           />
       </section>
