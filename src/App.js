@@ -8,7 +8,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      selectedMadLib: MadLibs[0]
+      selectedMadLib: MadLibs[0],
+      words: {}
     };
   }
 
@@ -23,12 +24,21 @@ class App extends Component {
     this.setState({selectedMadLib: updatedMadLib});
   }
 
+  updateWords = (words) => {
+    for (let field in words) {
+      this.updateWord(field, words[field]);
+    }
+  };
+
   render() {
     return (
       <section className="App">
         <h1>Welcome to MadLibs!</h1>
         <p>Fill in all of the choices to see your final story.</p>
-        <MadLibForm wordTypes={this.state.selectedMadLib.words}/>
+        <MadLibForm
+          wordTypes={this.state.selectedMadLib.words}
+          setWords={this.updateWords}
+        />
         <Story
           title={ this.state.selectedMadLib.title }
           text={ this.state.selectedMadLib.getText() }

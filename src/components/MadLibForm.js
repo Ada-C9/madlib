@@ -13,12 +13,9 @@ class MadLibForm extends Component {
   }
 
   static propTypes = {
-    wordTypes: PropTypes.arrayOf( PropTypes.object.isRequired ).isRequired
+    wordTypes: PropTypes.arrayOf( PropTypes.object.isRequired ).isRequired,
+    setWords: PropTypes.func
   }
-
-  onSubmit = (event) => {
-    event.preventDefault();
-  };
 
   onFieldChange = (key, value) => {
     const updatedWords = this.state.words;
@@ -26,6 +23,11 @@ class MadLibForm extends Component {
 
     this.setState(updatedWords);
   }
+
+  onFormSubmit = (event) => {
+    event.preventDefault();
+    this.props.setWords(this.state.words);
+  };
 
   render() {
     const inputComponents = this.props.wordTypes.map((wordType) => {
@@ -38,8 +40,9 @@ class MadLibForm extends Component {
         />
       );
     });
+
     return(
-      <form onSubmit={ this.onSubmit }>
+      <form onSubmit={ this.onFormSubmit }>
         { inputComponents }
         <input type="submit" />
       </form>
