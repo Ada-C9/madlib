@@ -10,6 +10,7 @@ class App extends Component {
 
     this.state = {
       selectedMadLib: MadLibs[Math.floor(Math.random()*MadLibs.length)],
+      formSubmitted: false,
     };
   }
 
@@ -25,22 +26,27 @@ class App extends Component {
     this.setState({selectedMadLib: updatedMadLib});
   }
 
+  updateFormStatus = () => {
+    this.setState({
+      formSubmitted: true
+    });
+  }
+
   render() {
+    let story = this.state.formSubmitted ? <Story
+      title={ this.state.selectedMadLib.title }
+      text={ this.state.selectedMadLib.getText() }
+      /> : null ;
     return (
       <section className="App">
         <h1>Welcome to MadLibs!</h1>
         <p>Fill in all of the choices to see your final story.</p>
-        {/*
-          Render your form with input values
-        */}
         <MadLibsForm
           wordsNeeded={ this.state.selectedMadLib.words }
           updateWordCallback={ this.updateWord }
+          updateFormStatusCallback={ this.updateFormStatus }
          />
-        <Story
-          title={ this.state.selectedMadLib.title }
-          text={ this.state.selectedMadLib.getText() }
-          />
+        { story }
       </section>
     );
   }

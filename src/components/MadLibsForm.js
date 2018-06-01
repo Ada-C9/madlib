@@ -5,6 +5,7 @@ class MadLibsForm extends Component {
   static propTypes = {
     wordsNeeded: PropTypes.array.isRequired,
     updateWordCallback: PropTypes.func.isRequired,
+    updateFormStatusCallback: PropTypes.func.isRequired,
   };
 
   constructor (props) {
@@ -28,6 +29,7 @@ class MadLibsForm extends Component {
     for (let wordObject of this.state.wordsNeeded) {
       this.props.updateWordCallback(wordObject.key, wordObject.value);
     }
+    this.props.updateFormStatusCallback();
   }
 
   render() {
