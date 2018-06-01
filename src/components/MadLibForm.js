@@ -25,7 +25,6 @@ class MadLibForm extends Component {
     updatedWords[key] = value
 
     this.setState(updatedWords);
-    console.log(`Updated = ${key}`);
   }
 
   render() {
