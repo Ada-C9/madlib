@@ -13,6 +13,11 @@ class NewStoryForm extends Component {
     this.props.updateWord(key, value);
   }
 
+  onSubmit = (event) => {
+    event.preventDefault();
+    this.props.completedStoryVisibility();
+  }
+
   render() {
     let words = this.props.words;
     let wordInput = words.map((word) => {
@@ -29,7 +34,11 @@ class NewStoryForm extends Component {
 
         return (
       <section>
-        <form  className="new-story-form">
+        <form
+        className="new-story-form"
+
+        onSubmit={this.onSubmit}>
+
           {wordInput}
           <input type="submit" />
         </form>
