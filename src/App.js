@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import MadLibs from './madlibs/MadLibs.js';
+import Dropdown from './components/Dropdown';
 import MadLibsForm from './components/MadLibsForm';
 import Story from './components/Story.js';
 
@@ -41,6 +42,7 @@ class App extends Component {
       <section className="App">
         <h1>Welcome to MadLibs!</h1>
         <p>Fill in all of the choices to see your final story.</p>
+        <Dropdown />
         <MadLibsForm
           wordsNeeded={ this.state.selectedMadLib.words }
           updateWordCallback={ this.updateWord }
