@@ -16,6 +16,16 @@ class MadLibForm extends Component {
 		}
 	}
 
+	onInputChange = (event) => {
+		const key = event.target.name;
+		const newVal = event.target.value;
+
+		const newState = {};
+		newState[key] = newVal
+		this.setState(newState)
+
+	}
+
 
 
 
