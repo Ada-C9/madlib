@@ -33,8 +33,6 @@ class MadLibForm extends Component {
 			const key = word.key
 			const value = this.state[key]
 
-			console.log(key);
-			console.log(value);
 			this.state.updateWordCallback(key, value)
 		});
 
