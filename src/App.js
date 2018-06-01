@@ -30,7 +30,6 @@ class App extends Component {
         <h1>Welcome to MadLibs!</h1>
         <p>Fill in all of the choices to see your final story.</p>
         <MadLibForm
-          key = { this.state.selectedMadLib.title }
           words={ this.state.selectedMadLib.words }
           updateWordCallback = { this.updateWord }
         />

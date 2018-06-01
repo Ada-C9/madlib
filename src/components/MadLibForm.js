@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 class MadLibForm extends React.Component {
   static propTypes = {
-    key: PropTypes.string,
     words: PropTypes.array.isRequired,
     updateWordCallback: PropTypes.func.isRequired
   }
