@@ -26,7 +26,19 @@ class MadLibForm extends Component {
 
 	}
 
+	onFormSubmit = (event) => {
+		event.preventDefault();
 
+		this.state.words.map((word, index) =>{
+			const key = word.key
+			const value = this.state[key]
+
+			console.log(key);
+			console.log(value);
+			this.state.updateWordCallback(key, value)
+		});
+
+	}
 
 
 	render(){
