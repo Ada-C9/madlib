@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import MadLibs from './madlibs/MadLibs.js';
+import MadLibsForm from './components/MadLibsForm';
 import Story from './components/Story.js';
 
 class App extends Component {
@@ -31,6 +32,7 @@ class App extends Component {
         {/*
           Render your form with input values
         */}
+        <MadLibsForm wordsNeeded={ this.state.selectedMadLib.words } />
         <Story
           title={ this.state.selectedMadLib.title }
           text={ this.state.selectedMadLib.getText() }
