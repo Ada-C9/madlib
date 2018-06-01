@@ -17,7 +17,7 @@ class WordInput extends Component {
   render() {
     return(
       <div>
-        <input type="text" onChange={this.onInputChange} placeholder={this.props.label}/>
+        <input type="text" onChange={this.onInputChange} placeholder={this.props.label} />
       </div>
     );
   }

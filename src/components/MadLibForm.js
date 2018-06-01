@@ -14,19 +14,18 @@ class MadLibForm extends Component {
 
   static propTypes = {
     wordTypes: PropTypes.arrayOf( PropTypes.object.isRequired ).isRequired,
-    setWords: PropTypes.func
+    setWords: PropTypes.func,
+    submitStory: PropTypes.func
   }
 
   onFieldChange = (key, value) => {
-    const updatedWords = this.state.words;
-    updatedWords[key] = value;
-
-    this.setState(updatedWords);
+    this.props.setWords(key, value);
   }
 
   onFormSubmit = (event) => {
     event.preventDefault();
-    this.props.setWords(this.state.words);
+    
+    this.props.submitStory();
   };
 
   render() {

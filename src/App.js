@@ -15,6 +15,27 @@ class App extends Component {
     };
   }
 
+  // methods to find story options
+  findStories = () => {
+    const stories = [];
+    MadLibs.forEach((story, index) => {
+      const storyDetails = {};
+      storyDetails.title = story.title;
+      storyDetails.index = index;
+      stories.push(storyDetails);
+    });
+    return stories;
+  };
+
+  // method to set selectedMadLib to match the option selected by user
+  setStory = (storyIndex) => {
+    this.setState({
+      selectedMadLib: MadLibs[storyIndex],
+      words: {},
+      submitted: false
+    });
+  };
+
   // Update the value of a word in the selected
   // mad lib using setState
   updateWord(key, value) {
@@ -26,31 +47,22 @@ class App extends Component {
     this.setState({selectedMadLib: updatedMadLib});
   }
 
-  updateWords = (words) => {
+  updateWords = (key, value) => {
+    const updatedWords = this.state.words;
+
+    updatedWords[key] = value;
+    this.setState({ words: updatedWords });
+  };
+
+  renderStory = () => {
+    const words = this.state.words
     for (let field in words) {
       this.updateWord(field, words[field]);
     }
     const submitted = !this.state.submitted
     this.setState({ submitted });
-  };
-
-  findStories = () => {
-    const stories = [];
-    MadLibs.forEach((story, index) => {
-      const storyDetails = {};
-      storyDetails.title = story.title;
-      storyDetails.index = index;
-      stories.push(storyDetails);
-    });
-    console.log(stories)
-    return stories;
-  };
-
-  setStory = (storyIndex) => {
-    this.setState({
-      selectedMadLib: MadLibs[storyIndex]
-    });
-  };
+    console.log(this.state.selectedMadLib);
+  }
 
   render() {
     return (
@@ -62,6 +74,7 @@ class App extends Component {
           <MadLibForm
             wordTypes={this.state.selectedMadLib.words}
             setWords={this.updateWords}
+            submitStory={ this.renderStory }
           />
         </div>
         <div className={ this.state.submitted ? "" : "hidden" }>
