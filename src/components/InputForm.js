@@ -9,10 +9,23 @@ class InputForm extends React.Component {
 
   constructor(props) {
     super();
-    this.state = this.getMadLibFields(props.madlib);
+    this.state = {
+      title: props.madlib.title,
+      fields: InputForm.getMadLibFields(props.madlib)
+    }
   }
 
-  getMadLibFields = (ml) => {
+  static getDerivedStateFromProps(props, state) {
+    if (props.madlib.title !== state.title) {
+      return {
+        title: props.madlib.title,
+        fields: InputForm.getMadLibFields(props.madlib)
+      };
+    }
+    return null;
+  }
+
+  static getMadLibFields = (ml) => {
     const madLibObject = {};
 
     ml.words.forEach((word) => {

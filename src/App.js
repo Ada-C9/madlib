@@ -9,7 +9,7 @@ class App extends Component {
     super();
 
     this.state = {
-      selectedMadLib: this.getRandomMadLib()
+      selectedMadLib: this.getRandomMadLib(),
     };
   }
 
@@ -47,6 +47,10 @@ class App extends Component {
     }
   }
 
+  forceRender = () => {
+    this.setState({selectedMadLib: this.getRandomMadLib()})
+  }
+
   render() {
     return (
       <section className="App">
@@ -54,6 +58,7 @@ class App extends Component {
         <p>Fill in all of the choices to see your final story.</p>
         <InputForm madlib={this.state.selectedMadLib} submitHandler={this.submitHandler}/>
         {this.showStory()}
+        <button onClick={this.forceRender}>Get New MadLib</button>
       </section>
     );
   }
