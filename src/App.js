@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import MadLibs from './madlibs/MadLibs.js';
 import MadLibForm from './components/MadLibForm.js'
+import StorySelector from './components/StorySelector.js'
 import Story from './components/Story.js';
 
 class App extends Component {
@@ -33,10 +34,23 @@ class App extends Component {
     this.setState({ submitted });
   };
 
+  findStories = () => {
+    const stories = [];
+    MadLibs.forEach((story, index) => {
+      const storyDetails = {};
+      storyDetails.title = story.title;
+      storyDetails.index = index;
+      stories.push(storyDetails);
+    });
+    console.log(stories)
+    return stories;
+  }
+
   render() {
     return (
       <section className="App">
         <h1>Welcome to MadLibs!</h1>
+        <StorySelector stories={this.findStories()}/>
         <p>Fill in all of the choices to see your final story.</p>
         <div className={ this.state.submitted ? "hidden" : "" }>
           <MadLibForm
