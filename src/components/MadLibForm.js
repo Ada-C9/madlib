@@ -22,41 +22,14 @@ class MadLibForm extends Component {
     this.setState({words: updatedWords});
 
     console.log(`Updated = ${index} ${value}`);
-    // this.setState(this.state.words[key]= value);
-    // this.onFieldChange('name', 'Dumbledore')
-
-    // this.props.updateWord(key, value);
-    // console.log(`Updated = ${key}`);
   };
 
-  // addWords = (student) => {
-  //   const students = this.state.students;
-  //   students.push(student);
-  //   this.setState({
-  //     students,
-  //   });
-  // };
-  //
   onSubmit = (event) => {
     event.preventDefault();
 
     this.state.words.map((word) => {
-      // console.log('foo');
-      // console.log(word);
-      // console.log('bar');
       this.props.updateWord(word.key, word.value)
     });
-  //   // if (this.emailValid()) {
-  //     this.props.addStudent({
-  //       name: this.state.name,
-  //       email: this.state.email,
-  //     });
-  //
-  //     this.setState({
-  //       name: '',
-  //       email: '',
-  //     });
-  //   }
   };
 
   render() {
@@ -73,9 +46,6 @@ class MadLibForm extends Component {
         />
       );
     });
-
-
-
 
     return (
       <section className="madlib-form">

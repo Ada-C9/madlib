@@ -17,22 +17,10 @@ class FormField extends Component {
      formKey: PropTypes.string.isRequired,
      formLabel: PropTypes.string.isRequired,
      index: PropTypes.number.isRequired,
-     // onFormFieldChange: PropTypes.func.isRequired
   };
 
   onFormValueChange = (value) => {
-
-    // console.log('bar');
-    // console.log(value);
-    // console.log(this.state);
-    // console.log('*');
-    // const updatedState = {};
-    // updatedState[this.state.value] = value;
     this.setState({value: value});
-
-    // console.log(`Updated = ${key} ${value}`);
-    // console.log(this.props.formLabel);
-    // this.state.value = event.target.value;
     this.props.onFormFieldChange(this.props.index, value);
   };
 
@@ -44,10 +32,8 @@ class FormField extends Component {
         <label htmlFor={this.props.formLabel}>{this.props.formLabel}</label>
         <input onChange={(event) => { this.onFormValueChange(event.target.value) }} //
                type="text"
-               // name={this.props.formKey}
                value={this.state.value}
-          // onChange={(event) => { this.props.onFormFieldChange(this.props.index, event.target.value) }}
-          // className={this.emailValid() ? 'valid': 'invalid'}
+          // className={this.fieldValid() ? 'valid': 'invalid'}
         />
       </section>
     );
