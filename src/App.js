@@ -12,7 +12,8 @@ class App extends Component {
     this.state = {
       selectedMadLib: MadLibs[0],
       showForm: 'show',
-      showStory: 'hide'
+      showStory: 'hide',
+      showDropdown: 'show'
     };
   }
 
@@ -30,7 +31,8 @@ class App extends Component {
   changeDisplayState = () => {
     this.setState({
       showForm: 'hide',
-      showStory: 'show'
+      showStory: 'show',
+      showDropdown: 'hide'
     });
   }
 
@@ -40,13 +42,17 @@ class App extends Component {
     });
   }
 
+  reloadGame = () => {
+    window.location.reload();
+  }
+
   render() {
     return (
       <section className="App">
         <h1>Welcome to MadLibs!</h1>
         <p>Fill in all of the choices to see your final story.</p>
 
-        <div>
+        <div className = { this.state.showDropdown }>
           <Dropdown
             getStory = { this.getStory }
           />
@@ -65,6 +71,9 @@ class App extends Component {
             title = { this.state.selectedMadLib.title }
             text = { this.state.selectedMadLib.getText() }
           />
+          <button onClick={this.reloadGame}>
+            Play Again
+          </button>
         </div>
 
       </section>
