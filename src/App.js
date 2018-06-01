@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 import MadLibs from './madlibs/MadLibs.js';
 import Story from './components/Story.js';
-
 import WordsForm from './components/WordsForm.js';
 
 class App extends Component {
@@ -20,7 +19,6 @@ class App extends Component {
   // Update the value of a word in the selected
   // mad lib using setState
   updateWord = (key, value) => {
-    console.log(this.state.selectedMadLib)
     const updatedMadLib = this.state.selectedMadLib;
     const changedWord = updatedMadLib.words.find((word) => {
       return word.key === key
@@ -38,6 +36,11 @@ class App extends Component {
       storyActive: !currentState
     });
   };
+
+  // reload page to start a new game:
+  playAgain = () => {
+    window.location.reload();
+  }
 
   render() {
     return (
@@ -57,6 +60,7 @@ class App extends Component {
         title={ this.state.selectedMadLib.title }
         text={ this.state.selectedMadLib.getText() }
         />
+        <button onClick={this.playAgain}> Play Again </button>
         </div>
 
         </section>
@@ -65,16 +69,3 @@ class App extends Component {
   }
 
   export default App;
-
-
-  // // Generate a different madLib:
-  // playAgain = () => {
-  //   // event.preventDefault();
-  //   this.setState({
-  //     selectedMadLib: MadLibs[Math.floor(Math.random() * MadLibs.length)],
-  //     storyActive: !this.state.storyActive
-  //   });
-  //   // this.changeDisplay;
-  // }
-  // ...inside form:
-  // <button onClick={this.playAgain}> Play Again </button>
