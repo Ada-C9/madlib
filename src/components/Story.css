@@ -1,5 +1,6 @@
 .story {
   border: 1px solid white;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin: 20px;
+  padding: 0 20px;
+  max-width: 800px;
 }

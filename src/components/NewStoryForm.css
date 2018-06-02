@@ -1,0 +1,23 @@
+.new-story-form {
+  width: 50%;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+.label-input {
+  width: 350px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  padding-bottom: 10px;
+}
+
+.button {
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+h1 {
+  margin-bottom: 0;
+}
