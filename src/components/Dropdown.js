@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import MadLibs from './../madlibs/MadLibs.js';
 
 class Dropdown extends Component {
+  static propTypes = {
+    selectMadLibCallback: PropTypes.func.isRequired,
+    selectedMadLib: PropTypes.string.isRequired,
+  };
 
-  selectMadLib = (event) => {
+  selectStory = (event) => {
     console.log(event.target.value);
+    this.props.selectMadLibCallback(event.target.value);
   }
 
   render() {
@@ -13,9 +19,8 @@ class Dropdown extends Component {
     });
 
     return (
-      <section onChange={ this.selectMadLib }>
-        <select>
-          <option disabled selected value> -- select an option -- </option>
+      <section onChange={ this.selectStory }>
+        <select defaultValue={this.props.selectedMadLib} >
           { info }
         </select>
       </section>

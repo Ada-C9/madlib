@@ -15,6 +15,15 @@ class App extends Component {
     };
   }
 
+  selectMadLib = (storyTitle) => {
+    let updatedMadLibStory = MadLibs.find((story) => {
+      return story.title === storyTitle
+    });
+    this.setState({
+      selectedMadLib: updatedMadLibStory
+    });
+  }
+
   // Update the value of a word in the selected
   // mad lib using setState
   updateWord = (key, value) =>  {
@@ -42,7 +51,11 @@ class App extends Component {
       <section className="App">
         <h1>Welcome to MadLibs!</h1>
         <p>Fill in all of the choices to see your final story.</p>
-        <Dropdown />
+
+        <h3>Story: { this.state.selectedMadLib.title }</h3>
+
+        <Dropdown selectMadLibCallback={ this.selectMadLib } selectedMadLib={ this.state.selectedMadLib.title } />
+
         <MadLibsForm
           wordsNeeded={ this.state.selectedMadLib.words }
           updateWordCallback={ this.updateWord }

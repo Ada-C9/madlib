@@ -8,37 +8,23 @@ class MadLibsForm extends Component {
     updateFormStatusCallback: PropTypes.func.isRequired,
   };
 
-  constructor (props) {
-    super();
-    this.state = {
-      wordsNeeded: props.wordsNeeded
-    };
-  }
-
   onInputChange = (event) => {
-    let updatedWords = this.state.wordsNeeded;
-    let updatedWord = updatedWords.find((wordObject) => {
-      return wordObject.key === event.target.name;
-    });
-    updatedWord.value = event.target.value;
-    this.setState({wordsNeeded: updatedWords});
+    this.props.updateWordCallback(event.target.name, event.target.value);
   }
 
   onFormSubmit = (event) => {
     event.preventDefault();
-    for (let wordObject of this.state.wordsNeeded) {
-      this.props.updateWordCallback(wordObject.key, wordObject.value);
-    }
     this.props.updateFormStatusCallback();
   }
 
   render() {
-    const wordInputs = this.state.wordsNeeded.map((wordObject) => {
-      return(<div>
-        <input
-        key={wordObject['key']}
-        name={wordObject['key']}
-        placeholder={wordObject['label']} onChange={ this.onInputChange } />
+    const wordInputs = this.props.wordsNeeded.map((wordObject) => {
+      return(<div key={wordObject['key']}>
+      <input
+      name={wordObject['key']}
+      placeholder={wordObject['label']}
+      onChange={ this.onInputChange }
+      />
       </div>);
     });
 
