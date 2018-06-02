@@ -12,7 +12,7 @@ class Story extends Component {
   render() {
     return (
       <section className="story">
-        <h2>{ this.props.title }</h2>
+        <h3>{ this.props.title }</h3>
         <p>{ this.props.text }</p>
       </section>
     );

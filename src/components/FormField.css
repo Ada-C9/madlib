@@ -9,20 +9,10 @@ input[type=text]:focus {
 }
 
 input[type=text], select {
-  /*width: 100%;*/
-  /*margin: 8px 0;*/
   box-sizing: border-box;
   border: 1px solid #555;
   outline: none;
   padding: 2px 5px;
-  display: inline-block;
-  /*border: 1px solid #ccc;*/
   border-radius: 4px;
   font-size: 12pt;
-  /*outline: none;*/
-
-}
-
-input:invalid {
-  background: hsla(0, 90%, 70%, 1);
 }

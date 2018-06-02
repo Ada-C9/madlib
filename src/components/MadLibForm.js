@@ -6,18 +6,15 @@ import './MadLibForm.css';
 class MadLibForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {words: this.props.words};
+    this.state = { words: this.props.words };
   }
 
-  static propTypes = {
-    updateWord: PropTypes.func.isRequired,
-  };
+  static propTypes = { updateWord: PropTypes.func.isRequired };
 
   onFieldChange = (index, value) => {
-    const updatedWords = this.state.words;
-    updatedWords[index].value = value;
-    this.setState({words: updatedWords});
-    console.log(`Updated = ${index} ${value}`);
+    const words = this.state.words;
+    words[index].value = value;
+    this.setState({ words, });
   };
 
   onSubmit = (event) => {
@@ -27,35 +24,28 @@ class MadLibForm extends Component {
     }
   };
 
-  hasCompletedMadLib = () => {
-    return this.state.words.every(this.hasInput);
-  };
+  hasCompletedMadLib = () => { return this.state.words.every(this.hasInput) };
 
-  hasInput(inputField) {
-    return inputField.value !== undefined && inputField.value.match(/\w+?/);
-  }
+  hasInput(inputField) { return inputField.value !== undefined && inputField.value.match(/\w+?/) }
 
   render() {
     const formFields = this.state.words.map((word, index) => {
       return (
-        <FormField key = {word.key}
-                   onFieldChange = {this.onFieldChange}
-                   formLabel={word.label}
-                   index = { index }
+        <FormField key={ word.key }
+                   onFieldChange={ this.onFieldChange }
+                   formLabel={ word.label }
+                   index={ index }
         />
       );
     });
 
     return (
       <section className="madlib-form">
-        <p>Fill in all of the choices to see your final story.</p>
-        <form
-          onSubmit={this.onSubmit}
-          className="madlib-form-form"
-        >
+        <h4>Fill in all of the choices to see your final story.</h4>
+        <form onSubmit={ this.onSubmit }>
           {formFields}
           <input
-            className="button success"
+            className="button"
             type="submit"
             value="MadLib Me!"
           />

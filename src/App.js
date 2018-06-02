@@ -17,7 +17,6 @@ class App extends Component {
 
   // Update the value of a word in the selected mad lib using setState
   updateWord(key, value) {
-    console.log(this.state);
     const selectedMadLib = this.state.selectedMadLib;
     selectedMadLib.words.find((word) => { return word.key === key}).value = value;
     this.setState({selectedMadLib, hasCompleteMadLib: true });
@@ -32,14 +31,18 @@ class App extends Component {
 
     const formBody =
       <MadLibForm
-        words={this.state.selectedMadLib.words}
-        updateWord={this.updateWord}
+        words={ this.state.selectedMadLib.words }
+        updateWord={ this.updateWord }
       />;
 
     return (
       <section className="App">
-        <h1>Welcome to MadLibs!</h1>
-        {this.state.hasCompleteMadLib ? storyBody : formBody}
+        <section className="outer-box">
+          <h1>Welcome to MadLibs!</h1>
+          <section className="outer-box">
+            {this.state.hasCompleteMadLib ? storyBody : formBody}
+          </section>
+        </section>
       </section>
     );
   }

@@ -14,18 +14,11 @@ class FormField extends Component {
     this.props.onFieldChange(this.props.index, value.trim());
   };
 
-
-//   testShit = (event) => {
-//     console.log(event);
-// };
-
   render() {
     return (
-      <section className="form-field"
-               // onBlur={this.trimWord()}
-      >
+      <section className="form-field">
         <label htmlFor={this.props.formLabel}>{this.props.formLabel}</label>
-        <input onChange={(event) => { this.onValueChange(event.target.value.trim()) }} //
+        <input onChange={(event) => { this.onValueChange(event.target.value.trim()) }}
                type="text"
         />
       </section>

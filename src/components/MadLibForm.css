@@ -1,13 +1,8 @@
-.madlib-form-form {
-  display: inline-block;
-  width: 400px;
-}
-
 .button {
   background-color: #FFD88C;
   color: #555555;
-  border: none;
-  border-radius: 8px;
+  border: 1px solid #555555;
+  border-radius: 4px;
   padding: 8px 16px;
   text-align: center;
   text-decoration: none;
@@ -22,7 +17,9 @@
 .button:hover {
   background-color: #555555;
   color: white;
+  border: 1px solid white;
 }
 
-/*#FD8B8E*/
-/*#FFD88C*/
+.button:focus {
+  outline: none;
+}
