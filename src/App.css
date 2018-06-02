@@ -7,3 +7,18 @@ body {
   color: white;
   font: normal 18px/1.5 "Fira Sans", "Helvetica Neue", sans-serif;
 }
+
+.outer-box {
+  display: inline-grid;;
+  width: 40vw;
+  min-width: 300px;
+  justify-content: center;
+  padding-bottom: 18px;
+  border: 1px solid #555555;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+h1 {
+  font-size: x-large;
+}

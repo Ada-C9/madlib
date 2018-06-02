@@ -1,5 +1,5 @@
-.story {
-  border: 1px solid white;
-  margin-left: 20px;
-  margin-right: 20px;
+.story p {
+  text-align: justify;
+  padding-left: 24px;
+  padding-right: 24px;
 }
