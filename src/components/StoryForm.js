@@ -7,6 +7,7 @@ class StoryForm extends Component {
   static propTypes = {
     updateWord: PropTypes.func.isRequired,
     words: PropTypes.func.isRequired,
+    changeStory: PropTypes.func.isRequired,
   };
 
   onFieldChange = (key, value) => {
@@ -15,6 +16,7 @@ class StoryForm extends Component {
 
   onSubmit = (event) => {
       event.preventDefault();
+      this.props.changeStory()
 
     };
 
@@ -33,12 +35,14 @@ class StoryForm extends Component {
          );
        });
     return (
+      <section>
         <form className="story-form"
         onSubmit = {this.onSubmit}
           >
           {inputs}
           <input type ="submit" className="button"/>
         </form>
+      </section>
     );
   }
 }

@@ -26,11 +26,6 @@ class App extends Component {
     this.setState({ selectedMadLib: updatedMadLib });
   }
 
-  changeStory = () => {
-     this.setState({
-       isStoryVisible: true,
-     });
-}
 
 showStory = () => {
     if (this.state.isStoryVisible) {
@@ -43,11 +38,10 @@ showStory = () => {
     }
   };
 
-  hideStory = () => {
-    this.setState({
-      isStoryVisible: false,
-    });
-
+changeStory = () => {
+  this.setState({
+    isStoryVisible: true,
+  });
 }
 
   render() {
@@ -58,11 +52,9 @@ showStory = () => {
         <StoryForm
           updateWord={this.updateWord}
           words = {this.state.selectedMadLib.words}
+          changeStory={this.changeStory}
         />
-        <Story
-          title={ this.state.selectedMadLib.title }
-          text={ this.state.selectedMadLib.getText() }
-          />
+        {this.showStory()}
       </section>
     );
   }
