@@ -9,10 +9,11 @@ class StoryForm extends Component {
 
   }
 
-  // static propTypes = {
-  //   selectedMadLib: Proptypes.object.isRequired,
-  //   updateWord: Proptypes.func.isRequired
-  // }
+    static propTypes = {
+    updateWord: PropTypes.func.isRequired,
+    words: PropTypes.array.isRequired,
+    changeVisibility: PropTypes.func.isRequired,
+  }
 
 
   onSubmit = (event) => {
