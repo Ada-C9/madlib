@@ -44,7 +44,7 @@ class InputForm extends React.Component {
 
   onSubmitClick = (event) => {
     event.preventDefault();
-    const submittedWords = Object.assign({}, this.state);
+    const submittedWords = Object.assign({}, this.state.fields);
     this.props.submitHandler(submittedWords);
   }
 
