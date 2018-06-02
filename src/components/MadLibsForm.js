@@ -6,6 +6,7 @@ class MadLibsForm extends Component {
     wordsNeeded: PropTypes.array.isRequired,
     updateWordCallback: PropTypes.func.isRequired,
     updateFormStatusCallback: PropTypes.func.isRequired,
+    toggleStoryCallback: PropTypes.func.isRequired,
   };
 
   onInputChange = (event) => {
@@ -15,6 +16,7 @@ class MadLibsForm extends Component {
   onFormSubmit = (event) => {
     event.preventDefault();
     this.props.updateFormStatusCallback();
+    this.props.toggleStoryCallback();
   }
 
   render() {

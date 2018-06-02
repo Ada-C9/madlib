@@ -12,6 +12,7 @@ class App extends Component {
     this.state = {
       selectedMadLib: MadLibs[Math.floor(Math.random()*MadLibs.length)],
       formSubmitted: false,
+      showStory: false,
     };
   }
 
@@ -42,8 +43,14 @@ class App extends Component {
     });
   }
 
+  toggleStory = () => {
+    this.setState({
+      showStory: !this.state.showStory,
+    });
+  }
+
   render() {
-    let story = this.state.formSubmitted ? <Story
+    let story = this.state.formSubmitted && this.state.showStory ? <Story
       title={ this.state.selectedMadLib.title }
       text={ this.state.selectedMadLib.getText() }
       /> : null ;
@@ -54,12 +61,16 @@ class App extends Component {
 
         <h3>Story: { this.state.selectedMadLib.title }</h3>
 
-        <Dropdown selectMadLibCallback={ this.selectMadLib } selectedMadLib={ this.state.selectedMadLib.title } />
+        <Dropdown
+          selectMadLibCallback={ this.selectMadLib } selectedMadLibTitle={ this.state.selectedMadLib.title }
+          toggleStoryCallback={ this.toggleStory }
+        />
 
         <MadLibsForm
           wordsNeeded={ this.state.selectedMadLib.words }
           updateWordCallback={ this.updateWord }
           updateFormStatusCallback={ this.updateFormStatus }
+          toggleStoryCallback={ this.toggleStory }
          />
         { story }
       </section>

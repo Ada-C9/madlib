@@ -5,12 +5,13 @@ import MadLibs from './../madlibs/MadLibs.js';
 class Dropdown extends Component {
   static propTypes = {
     selectMadLibCallback: PropTypes.func.isRequired,
-    selectedMadLib: PropTypes.string.isRequired,
+    selectedMadLibTitle: PropTypes.string.isRequired,
+    toggleStoryCallback: PropTypes.func.isRequired
   };
 
   selectStory = (event) => {
-    console.log(event.target.value);
     this.props.selectMadLibCallback(event.target.value);
+    this.props.toggleStoryCallback();
   }
 
   render() {
@@ -20,7 +21,7 @@ class Dropdown extends Component {
 
     return (
       <section onChange={ this.selectStory }>
-        <select defaultValue={this.props.selectedMadLib} >
+        <select defaultValue={this.props.selectedMadLibTitle} >
           { info }
         </select>
       </section>
