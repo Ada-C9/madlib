@@ -14,7 +14,6 @@ class Dropdown extends Component {
   render() {
     return (
       <div>
-      <p>Select a Story</p>
       <select onChange={this.handleChange}>
         <option disabled selected value>Select a Story </option>
         <option value={0}>Vacations</option>

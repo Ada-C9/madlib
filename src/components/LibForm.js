@@ -20,8 +20,7 @@ class LibForm extends Component {
     const fields = words.map((field) => {
       return (
         <div key={field.key}>
-          <label htmlFor={field.label}>{field.label}</label>
-          <input onChange={(event)=>{this.props.updateWord(field.key, event.target.value)}}/>
+          <input placeholder={field.label} onChange={(event)=>{this.props.updateWord(field.key, event.target.value)}}/>
         </div>
       );
     });
