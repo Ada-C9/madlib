@@ -2,6 +2,34 @@ import React, { Component } from 'react';
 import PropTypes from "prop-types";
 
 class GetWordsForm extends Component {
+//   onChangeHandler = (event) => {
+//     console.log(event);
+//   }
+//
+//   render(){
+//
+//     const words = this.props.words.map((word) =>{
+//       console.log(word.target);
+//     const  value="";
+//       return(
+//         <div>
+//         <label name = {word.key}>{word.label}l</label>
+//         <input type="text" name={word.key} value={value} onChange={this.onChangeHandler}/>
+//         </div>
+//       )
+//     })
+//
+//
+//   return(
+//     <form>
+//     {words}
+//     <input
+//     type="submit"
+//     value="Submit Form"/>
+//     </form>
+//   );
+// }
+// }
   constructor(props){
     super();
     const state = {};
