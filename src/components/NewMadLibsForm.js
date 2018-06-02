@@ -34,9 +34,9 @@ class NewMadLibsForm extends Component {
     this.props.words.forEach((word) => {
 
       this.props.updateWord(word.key, this.state[word.key])
-      this.setState({
-        [word.key]: '',
-      });
+      this.setState(
+        {[word.key]: '',},
+      );
     });
 
   }
