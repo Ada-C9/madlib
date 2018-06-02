@@ -16,6 +16,12 @@ class WordForm   extends Component {
     event.preventDefault();
     console.log("Form submission");
 
+    const firstName = this.state.name;
+    const lastName = this.state.name;
+    const email = this.state.email;
+    const password = this.state.password;
+    this.props.addStudentCallback(name, email);
+
     this.setState({
       name: '',
       email: ''
