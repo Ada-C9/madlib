@@ -6,12 +6,12 @@ class Dropdown extends Component {
   static propTypes = {
     selectMadLibCallback: PropTypes.func.isRequired,
     selectedMadLibTitle: PropTypes.string.isRequired,
-    toggleStoryCallback: PropTypes.func.isRequired
+    hideStoryCallback: PropTypes.func.isRequired
   };
 
   selectStory = (event) => {
     this.props.selectMadLibCallback(event.target.value);
-    this.props.toggleStoryCallback();
+    this.props.hideStoryCallback();
   }
 
   render() {
