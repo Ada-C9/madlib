@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+
 import './Story.css';
 
 class Story extends Component {
@@ -12,8 +13,8 @@ class Story extends Component {
   render() {
     return (
       <section className="story">
-        <h2>{ this.props.title }</h2>
-        <p>{ this.props.text }</p>
+      <h2>{ this.props.title }</h2>
+      <p>{ this.props.text }</p>
       </section>
     );
   }
