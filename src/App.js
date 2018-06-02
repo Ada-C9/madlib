@@ -2,14 +2,19 @@ import React, { Component } from 'react';
 import './App.css';
 import MadLibs from './madlibs/MadLibs.js';
 import Story from './components/Story.js';
+import InputForm from './components/InputForm';
 
 class App extends Component {
   constructor() {
     super();
 
     this.state = {
-      selectedMadLib: MadLibs[0]
+      selectedMadLib: this.getRandomMadLib(),
     };
+  }
+
+  getRandomMadLib = () => {
+    return MadLibs[Math.floor(Math.random() * MadLibs.length)]
   }
 
   // Update the value of a word in the selected
@@ -23,18 +28,37 @@ class App extends Component {
     this.setState({selectedMadLib: updatedMadLib});
   }
 
+  submitHandler = (formInput) => {
+    for (let type in formInput) {
+      this.updateWord(type, formInput[type]);
+    }
+  }
+
+  showStory = () => {
+    const allFilled = this.state.selectedMadLib.words.every((word) => {
+      return (word.value !== undefined)
+    });
+
+    if (allFilled){
+      return (<Story
+        title={ this.state.selectedMadLib.title }
+        text={ this.state.selectedMadLib.getText() }
+      />)
+    }
+  }
+
+  forceRender = () => {
+    this.setState({selectedMadLib: this.getRandomMadLib()})
+  }
+
   render() {
     return (
       <section className="App">
         <h1>Welcome to MadLibs!</h1>
         <p>Fill in all of the choices to see your final story.</p>
-        {/*
-          Render your form with input values
-        */}
-        <Story
-          title={ this.state.selectedMadLib.title }
-          text={ this.state.selectedMadLib.getText() }
-          />
+        <InputForm madlib={this.state.selectedMadLib} submitHandler={this.submitHandler}/>
+        {this.showStory()}
+        <button onClick={this.forceRender}>Get New MadLib</button>
       </section>
     );
   }
