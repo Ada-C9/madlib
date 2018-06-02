@@ -11,20 +11,22 @@ class FormField extends Component {
   };
 
   onValueChange = (value) => {
-    // if(this.hasNonEmptyInput(value)) {
-      this.props.onFieldChange(this.props.index, value.trim());
-    // }
+    this.props.onFieldChange(this.props.index, value.trim());
   };
 
 
+//   testShit = (event) => {
+//     console.log(event);
+// };
 
   render() {
     return (
-      <section className="form-field">
+      <section className="form-field"
+               // onBlur={this.trimWord()}
+      >
         <label htmlFor={this.props.formLabel}>{this.props.formLabel}</label>
-        <input onChange={(event) => { this.onValueChange(event.target.value) }} //
+        <input onChange={(event) => { this.onValueChange(event.target.value.trim()) }} //
                type="text"
-               // className={this.fieldValid() ? 'valid': 'invalid'}
         />
       </section>
     );

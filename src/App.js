@@ -9,7 +9,8 @@ class App extends Component {
     super();
 
     this.state = {
-      selectedMadLib: MadLibs[Math.floor(Math.random() * MadLibs.length)]
+      selectedMadLib: MadLibs[Math.floor(Math.random() * MadLibs.length)],
+      hasCompleteMadLib: false
     };
     this.updateWord = this.updateWord.bind(this);
   }
@@ -17,29 +18,28 @@ class App extends Component {
   // Update the value of a word in the selected mad lib using setState
   updateWord(key, value) {
     console.log(this.state);
-    const updatedMadLib = this.state.selectedMadLib;
-    const changedWord = updatedMadLib.words.find((word) => {
-      return word.key === key
-    });
-    changedWord.value = value;
-    this.setState({selectedMadLib: updatedMadLib});
+    const selectedMadLib = this.state.selectedMadLib;
+    selectedMadLib.words.find((word) => { return word.key === key}).value = value;
+    this.setState({selectedMadLib, hasCompleteMadLib: true });
   }
 
   render() {
+    const storyBody =
+      <Story
+        title={ this.state.selectedMadLib.title }
+        text={ this.state.selectedMadLib.getText() }
+      />;
+
+    const formBody =
+      <MadLibForm
+        words={this.state.selectedMadLib.words}
+        updateWord={this.updateWord}
+      />;
+
     return (
       <section className="App">
         <h1>Welcome to MadLibs!</h1>
-        <p>Fill in all of the choices to see your final story.</p>
-        {
-          <MadLibForm
-            words={this.state.selectedMadLib.words}
-            updateWord={this.updateWord}
-          />
-        }
-        <Story
-          title={ this.state.selectedMadLib.title }
-          text={ this.state.selectedMadLib.getText() }
-          />
+        {this.state.hasCompleteMadLib ? storyBody : formBody}
       </section>
     );
   }

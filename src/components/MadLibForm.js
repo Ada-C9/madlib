@@ -17,7 +17,7 @@ class MadLibForm extends Component {
     const updatedWords = this.state.words;
     updatedWords[index].value = value;
     this.setState({words: updatedWords});
-    // console.log(`Updated = ${index} ${value}`);
+    console.log(`Updated = ${index} ${value}`);
   };
 
   onSubmit = (event) => {
@@ -48,13 +48,12 @@ class MadLibForm extends Component {
 
     return (
       <section className="madlib-form">
+        <p>Fill in all of the choices to see your final story.</p>
         <form
           onSubmit={this.onSubmit}
           className="madlib-form-form"
         >
-          <section className="form-field-outer-section">
-            {formFields}
-          </section>
+          {formFields}
           <input
             className="button success"
             type="submit"

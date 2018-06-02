@@ -22,3 +22,7 @@ input[type=text], select {
   /*outline: none;*/
 
 }
+
+input:invalid {
+  background: hsla(0, 90%, 70%, 1);
+}
