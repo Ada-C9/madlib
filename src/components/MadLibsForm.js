@@ -5,7 +5,6 @@ class MadLibsForm extends Component {
   static propTypes = {
     wordsNeeded: PropTypes.array.isRequired,
     updateWordCallback: PropTypes.func.isRequired,
-    updateFormStatusCallback: PropTypes.func.isRequired,
     showStoryCallback: PropTypes.func.isRequired,
   };
 

@@ -67,7 +67,6 @@ class App extends Component {
         <MadLibsForm
           wordsNeeded={ this.state.selectedMadLib.words }
           updateWordCallback={ this.updateWord }
-          updateFormStatusCallback={ this.updateFormStatus }
           showStoryCallback={ this.showStory }
          />
         { story }
