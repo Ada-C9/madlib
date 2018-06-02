@@ -6,60 +6,35 @@ class MadlibForm extends Component {
 
   constructor() {
     super();
-    this.state = {
-      // name: '',
-      // email: '',
-    };
   }
 
   static propTypes = {
     // addStudent: PropTypes.func.isRequired,
   }
 
-  onFieldChange = (key, value) => {
-    const updatedState = {}
-    updatedState[key] = value;
-
-    this.setState({
-      updatedState,
-    });
-
-    console.log(`Updated: ${key}`);
-    // console.log(`state: ${this.state.name}`);
-
-  }
-
   wordValid = () => {
     return this.state.email.match(/\S+@\S+/)
   }
 
-  // makeStates()
-
-  // makeForm(this.props.title) {
-  //
-  // }
-
-  // onSubmit = (event) => {
-  //   event.preventDefault();
-  //   if (this.wordValid()) {
-  //     this.props.updateMadLib({
-  //       name: this.state.name,
-  //       email: this.state.email,
-  //     })
-  //     this.setState({
-  //       name: '',
-  //       email: '',
-  //     })
-  //   }
-  // }
+  onSubmit = (event) => {
+    event.preventDefault();
+    this.props.renderStory()
+  }
 
   render() {
-    console.log(this.props.selectedMadLib.words)
+    console.log(this.props.words)
 
-    const inputs = this.props.selectedMadLib.words.map(function(item) {
+    const inputs = this.props.words.map (item => {
       return <div key={ item.key }>
-              <label htmlFor={item.label}>{item.label}: </label>
-              <input name={item.label} onChange={(event) => {this.onFieldChange("thing", event.target.value)}}/>
+              <label htmlFor={item.key}>
+                {item.label}:
+              </label>
+              <input
+                name={item.label}
+                // placeholder={item.label}
+                onChange={(event) =>
+                  { this.props.updateWord(item.key, event.target.value) }}
+              />
             </div>
     });
 
@@ -67,7 +42,12 @@ class MadlibForm extends Component {
       <div>
         <form onSubmit={this.onSubmit}
         className="new-madlib-form">
-          <p>{inputs}</p>
+          {inputs}
+          <input
+            className="button success"
+            type="submit"
+            value="Submit"
+          />
         </form>
       </div>
     );
