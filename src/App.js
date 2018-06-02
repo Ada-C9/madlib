@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import './App.css';
 import MadLibs from './madlibs/MadLibs.js';
 import Story from './components/Story.js';
+import Form from './components/Form.js';
+
 
 class App extends Component {
   constructor() {
     super();
 
     this.state = {
-      selectedMadLib: MadLibs[0]
+      selectedMadLib: MadLibs[0],
     };
   }
 
@@ -23,7 +25,17 @@ class App extends Component {
     this.setState({selectedMadLib: updatedMadLib});
   }
 
+  getWords() {
+    let words = this.state.selectedMadLib.words;
+    return words
+  }
+
   render() {
+    // testing stuff here
+    let words = this.state.selectedMadLib.words;
+    console.log('words')
+    console.log(words);
+
     return (
       <section className="App">
         <h1>Welcome to MadLibs!</h1>
@@ -31,6 +43,10 @@ class App extends Component {
         {/*
           Render your form with input values
         */}
+
+        <Form words={this.getWords()} />
+
+
         <Story
           title={ this.state.selectedMadLib.title }
           text={ this.state.selectedMadLib.getText() }
