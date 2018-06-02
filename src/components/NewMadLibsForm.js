@@ -3,22 +3,23 @@ import PropTypes from 'prop-types';
 
 class NewMadLibsForm extends Component {
   static propTypes = {
-    addStudentCallback: PropTypes.func.isRequired,
+    words: PropTypes.array.isRequired,
+    updateWord: PropTypes.func.isRequired,
   }
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
-    this.state = {
-      adjective_1: '',
-      adjective_2: '',
-      noun_1: '',
-      noun_2: ''
-    }
+    let initialState = {};
+    props.words.forEach((word) => {
+      initialState[word.key]= '';
+    });
+
+    this.state = initialState;
   }
 
   onInputChange = (event) => {
-    console.log(`Got inupt change on ${event.target.name}, new value is ${event.target.value}`)
+    console.log(`Got input change on ${event.target.name}, new value is ${event.target.value}`)
 
     const newState = {};
     newState[event.target.name] = event.target.value;
@@ -30,74 +31,41 @@ class NewMadLibsForm extends Component {
 
     console.log('form submissions');
 
-    const adjective_1 = this.state.adjective_1;
-    const adjective_2 = this.state.adjective_2;
-    const noun_1 = this.state.noun_1;
-    const noun_2 = this.state.noun_2;
-    this.props.addStudentCallback(adjective_1, adjective_2, noun_1, noun_2);
+    this.props.words.forEach((word) => {
 
-    this.setState({
-      adjective_1: '',
-      adjective_2: '',
-      noun_1: '',
-      noun_2: ''
+      this.props.updateWord(word.key, this.state[word.key])
+      this.setState({
+        [word.key]: '',
+      });
     });
+
   }
 
 
   render() {
 
+    const words = this.props.words;
+    const inputs = words.map((word, index) => {
+      return <div key={ index }>
+            <label htmlFor={word.label}></label>
+            <input
+              name={word.key}
+              type="text"
+              placeholder={word.key}
+              value={this.state[word.key]}
+              onChange={this.onInputChange}
+              />
+          </div>
+    });
 
     return (
       <div>
         <form
         className="new-madlibs-form"
         id="new-madlibs"
+        onSubmit={this.onFormSubmit}
         >
-          <div>
-            <label htmlFor="adjective_1"></label>
-            <input
-              name="adjective_1"
-              type="text"
-              placeholder="adjective_1"
-              value={this.state.adjective_1}
-              onChange={this.onInputChange}
-              />
-          </div>
-
-          <div>
-            <label htmlFor="adjective_2"></label>
-            <input
-              name="adjective_2"
-              type="text"
-              placeholder="adjective_2"
-              value={this.state.adjective_2}
-              onChange={this.onInputChange}
-              />
-          </div>
-
-          <div>
-            <label htmlFor="noun_1"></label>
-            <input
-              name="noun_1"
-              type="text"
-              placeholder="noun_1"
-              value={this.state.noun_1}
-              onChange={this.onInputChange}
-              />
-          </div>
-
-          <div>
-            <label htmlFor="noun_2"></label>
-            <input
-              name="noun_2"
-              type="text"
-              placeholder="noun_2"
-              value={this.state.noun_2}
-              onChange={this.onInputChange}
-              />
-          </div>
-
+          {inputs}
           <input
             className="button success"
             type="submit"
@@ -105,7 +73,7 @@ class NewMadLibsForm extends Component {
           />
         </form>
       </div>
-    );
+    )
   }
 
 }

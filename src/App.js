@@ -10,6 +10,7 @@ class App extends Component {
 
     this.state = {
       selectedMadLib: MadLibs[0]
+      // selectedMadLib: MadLibs[Math.floor(Math.random() * (MadLibs.length-1))]
     };
   }
 
@@ -23,14 +24,19 @@ class App extends Component {
     changedWord.value = value;
     this.setState({selectedMadLib: updatedMadLib});
   }
-
+  
   render() {
+
+    console.log(this.state.selectedMadLib);
+
     return (
       <section className="App">
         <h1>Welcome to MadLibs!</h1>
         <p>Fill in all of the choices to see your final story.</p>
         <NewMadLibsForm
-          addMadLibsCallback={this.updateWord}/>
+          words = {this.state.selectedMadLib.words}
+          updateWord = {this.updateWord}
+          />
         <Story
           title={ this.state.selectedMadLib.title }
           text={ this.state.selectedMadLib.getText() }
