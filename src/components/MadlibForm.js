@@ -16,13 +16,17 @@ class MadlibForm extends Component {
     return this.state.email.match(/\S+@\S+/)
   }
 
+  // clearForm = () => {
+  //
+  // }
+
   onSubmit = (event) => {
     event.preventDefault();
     this.props.renderStory()
+    // this.clearForm();
   }
 
   render() {
-    console.log(this.props.words)
 
     const inputs = this.props.words.map (item => {
       return <div key={ item.key }>
