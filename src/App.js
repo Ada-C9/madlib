@@ -9,7 +9,8 @@ class App extends Component {
     super();
 
     this.state = {
-      selectedMadLib: MadLibs[1] // MadLibs[Math.floor(Math.random() * MadLibs.length - 1)]
+      selectedMadLib: MadLibs[Math.floor(Math.random() * (MadLibs.length - 1))]
+
     };
   }
 
