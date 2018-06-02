@@ -9,13 +9,13 @@ class App extends Component {
     super();
 
     this.state = {
-      selectedMadLib: MadLibs[Math.floor(Math.random() * MadLibs.length)]
+        selectedMadLib: MadLibs[Math.floor(Math.random() * MadLibs.length-1)],
+        displayStory: false
     };
 
     this.updateWord = this.updateWord.bind(this)
   }
-  // Update the value of a word in the selected
-  // mad lib using setState
+
   updateWord(key, value) {
     const updatedMadLib = this.state.selectedMadLib;
     const changedWord = updatedMadLib.words.find((word) => {
@@ -25,19 +25,23 @@ class App extends Component {
     this.setState({selectedMadLib: updatedMadLib});
   }
 
+
   render() {
+
     return (
       <section className="App">
         <h1>Welcome to MadLibs!</h1>
-        <p>Fill in all of the choices to see your final story.</p>
+          <p>Fill in all of the choices to see your final story.</p>
         <StoryForm
           updateWord={this.updateWord}
           words = {this.state.selectedMadLib.words}
-        />
+          />
+
         <Story
           title={ this.state.selectedMadLib.title }
           text={ this.state.selectedMadLib.getText() }
-          />
+      />
+
       </section>
     );
   }

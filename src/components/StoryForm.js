@@ -6,6 +6,7 @@ class StoryForm extends Component {
 
   static propTypes = {
     updateWord: PropTypes.func.isRequired,
+    words: PropTypes.array,
 
   };
 
@@ -15,7 +16,10 @@ class StoryForm extends Component {
 
   onSubmit = (event) => {
       event.preventDefault();
-      console.log("Form submission!");
+      console.log("Form submission");
+      this.setState({
+			displayStory: true
+		})
     };
 
   render() {
@@ -33,12 +37,14 @@ class StoryForm extends Component {
          );
        });
     return (
+      <div className={'true'}>
         <form className="story-form"
         onSubmit = {this.onSubmit}
           >
           {inputs}
           <input type ="submit" className="button"/>
         </form>
+      </div>
     );
   }
 }
