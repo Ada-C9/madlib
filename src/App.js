@@ -5,16 +5,14 @@ import Story from './components/Story.js';
 import WordsForm from './components/WordsForm.js';
 
 class App extends Component {
+
 	constructor() {
 		super();
-
 		this.state = {
-			selectedMadLib: MadLibs[0]
+			selectedMadLib: MadLibs[Math.floor((Math.random() * 3))],
+			display: false
 		};
 	}
-
-
-
 
 	// Update the value of a word in the selected
 	// mad lib using setState
@@ -30,8 +28,13 @@ class App extends Component {
 	onSubmit = (formData) => {
 		console.log(formData);
 		//  loop through all form Data {}
+		formData.forEach( (newWord) => {
+			this.updateWord(newWord["key"], newWord["value"])
+		})
+		this.setState({
+			display: true
+		})
 	}
-
 
 	render() {
 		return (
@@ -43,10 +46,12 @@ class App extends Component {
 					words={ this.state.selectedMadLib.words }
 				/>
 
-				<Story
-					title={ this.state.selectedMadLib.title }
-					text={ this.state.selectedMadLib.getText() }
-				/>
+				<div className={ this.state.display.toString() }>
+					<Story
+						title={ this.state.selectedMadLib.title }
+						text={ this.state.selectedMadLib.getText() }
+					/>
+				</div>
 			</section>
 		);
 	}

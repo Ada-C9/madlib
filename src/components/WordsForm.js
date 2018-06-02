@@ -35,9 +35,13 @@ class WordsForm extends React.Component {
 
 	onFormSubmit = (event) => {
 		event.preventDefault();
-    const newWords = {};
 
-		this.props.onSubmitCallback();
+		this.props.onSubmitCallback(this.state.words);
+
+		const words = this.state.words;
+		words.forEach((word) => {
+			this.updateWord(word.key, '')
+		})
 	}
 
 	render() {
