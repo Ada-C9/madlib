@@ -1,28 +1,35 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import MadLibs from '../madlibs/MadLibs.js';
 
 class Form extends Component {
+
   static propTypes = {
-    title: PropTypes.string.isRequired,
-    text: PropTypes.string.isRequired,
+    madlib: PropTypes.object.isRequired,
   }
 
-  constructor() {
+  constructor(props) {
     super();
+    this.state = {
+      madlib: props.selectedMadlib
+    }
   }
 
   render() {
-    return (
-      <div>
-      <form className="form">
+    const madlib = this.props;
+    const inputFields = madlib.words.map((word, index) => {
+      return (
         <div>
-          <label htmlFor="adjective_1">Adjective 1</label>
-          <input name="adjective_1" type="text"/>
+          <label htmlFor={word.key}>{word.label}</label>
+          <input type='text' name={word.key}/>
         </div>
+      )
+    });
+
+    return (
+      <form className="form">
+        {inputFields}
         <input type="submit" value="submit" />
       </form>
-      </div>
     );
   }
 }
