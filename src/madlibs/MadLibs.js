@@ -2,10 +2,12 @@ export default [
   {
     title: "Vacations",
     getWord: function(key) {
+    
       return this.words.find((word) => {
         return word.key === key;
       }).value;
     },
+
     getText: function() {
       return `A vacation is when you take a trip to some ${ this.getWord('adjective_1') } place with your ${ this.getWord('adjective_2') } family or friends.
       Usually you go to some place that is near a/an ${ this.getWord('noun_1') } or up a/an ${ this.getWord('noun_2') }. `
@@ -13,7 +15,8 @@ export default [
     words: [
       {
         "key": "adjective_1",
-        "label": "Adjective 1"
+        "label": "Adjective 1",
+        "value": "random"
       },
       {
         "key": "adjective_2",

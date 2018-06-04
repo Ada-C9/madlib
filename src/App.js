@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import './App.css';
 import MadLibs from './madlibs/MadLibs.js';
 import Story from './components/Story.js';
-import WordForm from './components/WordForm.js';
+
 
 class App extends Component {
   constructor() {
     super();
-
+    this.selectedMadLib = MadLibs[0]
     this.state = {
       selectedMadLib: MadLibs[0]
     };
@@ -16,26 +16,30 @@ class App extends Component {
   // Update the value of a word in the selected
   // mad lib using setState
   updateWord=(key, value) => {
-    const updatedMadLib = this.state.selectedMadLib;
+    const updatedMadLib = this.selectedMadLib;
 
     const changedWord = updatedMadLib.words.find((word) => {
       return word.key === key
     });
+
     changedWord.value = value;
-    this.setState({selectedMadLib: updatedMadLib});
+this.selectedMadLib = updatedMadLib
   }
 
 
 
+
   render() {
-    console.log('formelement')
+
     const formelement = this.state.selectedMadLib.words.map((word, key) =>
     <div key={key}>
       <label htmlFor="field">{word.label}:</label>
       <input
         name={"wordinput"}
-        onChange={this.onUpdateWord}
-        value={this.state.word}
+        onChange={ (event)=> {
+          console.log(event.target.value, )
+        this.updateWord(word.key, event.target.value)}
+      }
         wordlabel= {word.label} />
     </div>
   );
@@ -49,10 +53,15 @@ class App extends Component {
 
 
 
-      <form className="form">
-        {formelement}
+      <form className="form" onSubmit={
+        (e) => {e.preventDefault()
+            e.stopPropagation();
+            this.setState({selectedMadLib: this.selectedMadLib})
+        }
 
-        <input type="submit" value="Submit MadLibs" />
+      } >
+        {formelement}
+        <input type="submit" value="Submit MadLibs"/>
       </form>
 
 
