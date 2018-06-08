@@ -12,6 +12,8 @@ class App extends Component {
     this.state = {
       selectedMadLib: MadLibs[0]
     };
+
+    this.updateWord = this.updateWord.bind(this);
   }
 
   // Update the value of a word in the selected
@@ -25,19 +27,6 @@ class App extends Component {
     this.setState({selectedMadLib: updatedMadLib});
   }
 
-  getWords() {
-    const words = [];
-
-    console.log(`this is the array of words: ${this.state.selectedMadLib.words}`);
-
-    this.state.selectedMadLib.words.map((wordObject) => {
-      words.push(wordObject.key);
-    });
-    return (
-      words
-    )
-  }
-
   render() {
 
     return (
@@ -48,9 +37,9 @@ class App extends Component {
           Render your form with input values
         */
 
-          < WordsInput
-            words = {this.getWords()}
-            updateMadLib = {this.updateWord}
+          <WordsInput
+            words={this.state.selectedMadLib.words}
+            updateMadLib={this.updateWord}
           />
 
         }

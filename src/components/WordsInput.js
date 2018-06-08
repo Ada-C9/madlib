@@ -3,22 +3,9 @@ import PropTypes from 'prop-types';
 import './WordsInput.css';
 
 class WordsInput extends Component {
-
-  constructor() {
-    super();
-
-    this.state = {
-      adjective_1: '',
-      adjective_2: '',
-      noun_1: '',
-      noun_2: '',
-    };
-  }
-
   static propTypes = {
     words: PropTypes.array.isRequired,
-    updateWord: PropTypes.func.isRequired,
-
+    updateMadLib: PropTypes.func.isRequired
   }
 
   onFieldChange = (key, value) => {
@@ -29,74 +16,33 @@ class WordsInput extends Component {
   }
 
   onSubmit = (event) => {
-  event.preventDefault();
-
-  // const madLibInfo = {
-  //   adjective_1: this.state.adjective_1,
-  //   adjective_2: this.state.adjective_2,
-  //   noun_1: this.state.noun_1,
-  //   noun_2: this.state.noun_2,
-  // }
-
-  this.props.updateWord('adjective_1', `test`);
-
-  this.setState({
-    adjective_1: '',
-    adjective_2: '',
-    noun_1: '',
-    noun_2: '',
-  });
-}
-
+    event.preventDefault();
+    this.props.words.forEach((word) => {
+      this.props.updateMadLib(word.key, this.state[word.key]);
+    });
+  }
 
   render() {
     return (
-      <div>
+      <form  onSubmit={this.onSubmit}>
+        {this.props.words.map((word) => {
+          return (
+            <p key={word.key}>
+              <label htmlFor={word.key}>{word.label}:</label>
+              <input
+              id={word.key} type="text"
+              onChange={(event) => { this.onFieldChange(word.key, event.target.value)}}
+              />
+            </p>
+          );
+        })}
 
-      <div>
-        <form  onSubmit={this.onSubmit}>
-      <div>
-      <p>
-        <label htmlFor="adjective_1">adjective_1:</label>
         <input
-        adjective_1 = "adjective_1"
-        onChange={(event) => { this.onFieldChange('adjective_1', event.target.value)}}
+        className="button success"
+        type="submit"
+        value="get MadLib"
         />
-      </p>
-
-      <p>
-        <label htmlFor="adjective_2">adjective_2:</label>
-        <input
-        adjective_2 = "adjective_2"
-        onChange={(event) => { this.onFieldChange('adjective_2', event.target.value)}}
-        />
-      </p>
-
-      <p>
-        <label htmlFor="noun_1">noun_1: </label>
-        <input
-        noun_1 = "noun_1"
-        onChange={(event) => { this.onFieldChange('noun_1', event.target.value)}}
-        />
-      </p>
-
-      <p>
-        <label htmlFor="noun_2">noun_2: </label>
-        <input
-        noun_2 = "noun_2"
-        onChange={(event) => { this.onFieldChange('noun_2', event.target.value)}}
-        />
-      </p>
-
-      <input
-      className="button success"
-      type="submit"
-      value="get MadLib"
-      />
-      </div>
       </form>
-      </div>
-      </div>
     );
   }
 }
