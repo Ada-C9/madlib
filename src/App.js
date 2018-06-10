@@ -3,6 +3,7 @@ import './App.css';
 import MadLibs from './madlibs/MadLibs.js';
 import Story from './components/Story.js';
 import MadLibForm from './components/MadLibForm.js';
+import MadLibSelector from './components/MadLibSelector.js';
 
 class App extends Component {
   constructor() {
@@ -29,6 +30,13 @@ class App extends Component {
     this.setState({ showStory: true });
   }
 
+  selectMadLib = (index) => {
+    // Clear out the old madlib
+    this.state.selectedMadLib.words.forEach((word) => { delete word.value });
+
+    this.setState({ selectedMadLib: MadLibs[index], showStory: false});
+  }
+
   render() {
     let story = null;
     if (this.state.showStory) {
@@ -43,6 +51,10 @@ class App extends Component {
     return (
       <section className="App">
         <h1>Welcome to MadLibs!</h1>
+        <MadLibSelector
+          madLibs={ MadLibs }
+          selectMadLibCallback={ this.selectMadLib }
+        />
         <p>Fill in all of the choices to see your final story.</p>
         <MadLibForm
           madLib={ this.state.selectedMadLib }
