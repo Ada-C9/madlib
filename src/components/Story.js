@@ -7,14 +7,6 @@ class Story extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
-    words: PropTypes.array.isRequired
-  }
-
-  constructor(props) {
-    super();
-    this.state = {
-      words: props.selectedMadLib
-    }
   }
 
   render() {

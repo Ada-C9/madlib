@@ -2,35 +2,37 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class Form extends Component {
-
   static propTypes = {
-    madlib: PropTypes.object.isRequired,
-  }
-
-  constructor(props) {
-    super();
-    this.state = {
-      madlib: props.selectedMadlib
-    }
+    madLib: PropTypes.object.isRequired,
+    updateWordCallback: PropTypes.func.isRequired,
+    completeMadlibCallback: PropTypes.func.isRequired,
   }
 
   render() {
-    const madlib = this.props;
-    const inputFields = madlib.words.map((word, index) => {
+    const inputs = this.props.madLib.words.map((word, index) => {
       return (
-        <div>
-          <label htmlFor={word.key}>{word.label}</label>
-          <input type='text' name={word.key}/>
-        </div>
-      )
+      <div>
+        <input
+          type='text'
+          placeholder={ word.label }
+          placeholder={ word.label }
+          onChange={ (event) => { this.props.updateWordCallback(word.key, event.target.value); } }
+        />
+      </div>
+      );
     });
 
     return (
-      <form className="form">
-        {inputFields}
-        <input type="submit" value="submit" />
+      <form onSubmit={ this.onSubmitForm }>
+        { inputs }
+        <input type='submit' value='Complete MadLib!' />
       </form>
     );
+  }
+
+  onSubmitForm = (event) => {
+    event.preventDefault();
+    this.props.completeMadlibCallback();
   }
 }
 
