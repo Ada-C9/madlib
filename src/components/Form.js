@@ -4,50 +4,56 @@ import PropTypes from 'prop-types';
 
 class Form extends Component {
   static propTypes = {
-    words: PropTypes.array.isRequired
+    words: PropTypes.array.isRequired,
+    updateAllWords: PropTypes.func.isRequired
   }
 
   constructor(props) {
     super();
-      this.state = {
-        words: this.addValue(props.words),
+    this.state = {
+      words: props.words.map(word => { return { ...word, value: "" }; }) /*this.addValue(props.words)*/
     };
   }
 
-
-  addValue = (words) => {
+  /*addValue = (words) => {
     for(let i=0; i < words.length; i++) {
       words[i].value = "";
     }
-  }
+  }*/
 
   onChange = (event) => {
     console.log(`Got a input change event ${event.target.value}`);
 
-    // const words = this.state.words.map((word) => {
-    //   if (word.key === event.target.name) {
-    //     word.value === event.target.value;
-    //   }
-    // });
+    const words = this.state.words.map((word) => {
+      if (word.key === event.target.name) {
+        // take all the keys and values in word currently, add value, and create new object
+        // since value: is the second argument, it will overwrite any previous value keys
+        return {...word, value: event.target.value};
+      }
+      else {
+        return word;
+      }
+    });
+    this.setState({ words: words });
   }
 
   onSubmit = (event) => {
     event.preventDefault();
     console.log("Form submission");
     console.log(event.target);
+    this.props.updateAllWords(this.state.words);
   }
 
   getFields = () => {
 
     let form = [];
-    let words = this.props.words;
+    let words = this.state.words;
 
     for(let i=0; i < words.length; i++) {
 
      let key = words[i]["key"];
      let label = words[i]["label"];
-     // don't have value as a part of state
-     let value = this.state.value
+     let value = words[i]["value"];
 
       form.push(
         <div>
@@ -64,7 +70,7 @@ class Form extends Component {
     return (
       <form onSubmit={this.onSubmit}>
         <div>{this.getFields()}</div>
-        <input type="submit" value="Play Game" />
+        <input className="button" type="submit" value="Play Game" />
       </form>
     );
   }

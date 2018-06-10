@@ -2,8 +2,25 @@
   text-align: center;
 }
 
+button, .button {
+  font-size: 1.25em;
+  margin: 1em;
+  border: 1px solid #ffefd5;
+  border-radius: 3px;
+  color: #FE7F9C;
+}
+
+button:hover, .button:hover {
+  color: #FE7F9C;
+  background: #ffefd5;
+  border: 1px solid #ffefd5;
+}
+
 body {
-  background: #3AAFAB;
-  color: white;
+  background: #FE7F9C;
   font: normal 18px/1.5 "Fira Sans", "Helvetica Neue", sans-serif;
+}
+
+h1 {
+  color: #ffefd5;
 }
