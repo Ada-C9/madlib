@@ -44,7 +44,7 @@ class MadLibForm extends Component {
   onFormSubmit = (event) => {
     event.preventDefault();
 
-    this.props.completeMadLibCallback();
+    this.props.completeMadLibCallback(this.state);
   }
 }
 

@@ -26,7 +26,10 @@ class App extends Component {
     this.setState({selectedMadLib: updatedMadLib});
   }
 
-  completeMadLib = () => {
+  completeMadLib = (words) => {
+    // loop through words
+    // and call updateWord for each key/value pair
+    Object.keys(words).forEach((key) => this.updateWord(key, words[key]));
     this.setState({ showStory: true });
   }
 
