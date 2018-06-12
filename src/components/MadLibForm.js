@@ -8,6 +8,17 @@ class MadLibForm extends Component {
     completeMadLibCallback: PropTypes.func.isRequired,
   }
 
+  constructor(props) {
+    super(props);
+
+    let inputs = {};
+    props.madLib.words.forEach((word) => {
+      inputs[word.key] = '';
+    });
+
+    this.state = inputs;
+  }
+
   render() {
     const inputs = this.props.madLib.words.map((word) => {
       return (
