@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 class MadLibForm extends Component {
   static propTypes = {
     madLib: PropTypes.object.isRequired,
-    updateWordCallback: PropTypes.func.isRequired,
     completeMadLibCallback: PropTypes.func.isRequired,
   }
 
@@ -26,7 +25,7 @@ class MadLibForm extends Component {
           <input
             type="text"
             placeholder={ word.label }
-            onChange={ (event) => { this.props.updateWordCallback(word.key, event.target.value); } }
+            onChange={ (event) => { this.setState({[word.key]: event.target.value}); } }
             value={ this.state[word.key] }
           />
         </div>
