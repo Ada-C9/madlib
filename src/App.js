@@ -60,6 +60,7 @@ class App extends Component {
           madLib={ this.state.selectedMadLib }
           updateWordCallback={ this.updateWord }
           completeMadLibCallback={ this.completeMadLib }
+          key={ this.state.selectedMadLib.title }
         />
         {story}
       </section>
