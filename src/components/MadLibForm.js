@@ -27,6 +27,7 @@ class MadLibForm extends Component {
             type="text"
             placeholder={ word.label }
             onChange={ (event) => { this.props.updateWordCallback(word.key, event.target.value); } }
+            value={ this.state[word.key] }
           />
         </div>
       );
